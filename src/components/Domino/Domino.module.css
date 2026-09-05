@@ -1,0 +1,427 @@
+.dominoWrapper {
+  position: relative;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  width: var(--domino-width, 300px);
+  height: var(--domino-height, 460px);
+  transition: transform 0.4s var(--ease-cinematic);
+}
+
+.dominoWrapper.large {
+  width: clamp(280px, 28vw, 420px);
+  height: clamp(420px, 52vh, 600px);
+}
+
+.dominoWrapper.square,
+.dominoWrapper.logo {
+  width: clamp(330px, 34vw, 460px);
+  height: clamp(288px, 29.7vw, 402px);
+  aspect-ratio: 1341 / 1173;
+}
+
+.dominoWrapper.photo {
+  width: clamp(380px, 36vw, 540px);
+  height: clamp(253px, 24vw, 360px);
+  aspect-ratio: 3 / 2;
+}
+
+.dominoWrapper.experienceLarge {
+  width: clamp(480px, 54vw, 840px);
+  height: clamp(320px, 36vw, 560px);
+  aspect-ratio: 3 / 2;
+}
+
+.dominoWrapper.widePhoto {
+  width: clamp(380px, 38vw, 560px);
+  height: clamp(214px, 21.4vw, 315px);
+  aspect-ratio: 16 / 9;
+}
+
+.dominoWrapper.medium {
+  width: clamp(220px, 20vw, 320px);
+  height: clamp(330px, 38vh, 460px);
+}
+
+.dominoWrapper.small {
+  width: clamp(160px, 15vw, 220px);
+  height: clamp(240px, 26vh, 310px);
+}
+
+@media (max-width: 768px) {
+  .dominoWrapper.large {
+    width: min(85vw, 340px);
+    height: min(128vw, 480px);
+  }
+
+  .dominoWrapper.square,
+  .dominoWrapper.logo {
+    width: min(88vw, 360px);
+    height: auto;
+    aspect-ratio: 1341 / 1173;
+  }
+
+  .dominoWrapper.photo {
+    width: min(92vw, 420px);
+    height: calc(min(92vw, 420px) * 2 / 3);
+    aspect-ratio: 3 / 2;
+  }
+
+  .dominoWrapper.experienceLarge {
+    width: min(94vw, 500px);
+    height: calc(min(94vw, 500px) * 2 / 3);
+    aspect-ratio: 3 / 2;
+  }
+
+  .dominoWrapper.widePhoto {
+    width: min(92vw, 420px);
+    height: calc(min(92vw, 420px) * 9 / 16);
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* Dynamic Floor Shadow */
+.floorShadow {
+  position: absolute;
+  bottom: -20px;
+  width: 90%;
+  height: 40px;
+  background: radial-gradient(ellipse at center, rgba(155, 48, 255, 0.45) 0%, rgba(10, 6, 16, 0.9) 70%, transparent 100%);
+  filter: blur(14px);
+  border-radius: 50%;
+  transform: rotateX(60deg) scale(0.9);
+  transition: transform 0.7s var(--ease-cinematic), opacity 0.7s var(--ease-cinematic);
+  z-index: 0;
+}
+
+/* 3D Physical Body Container */
+.dominoBody {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform-origin: bottom center;
+  transition: transform 0.7s cubic-bezier(0.25, 1, 0.4, 1);
+  z-index: 1;
+}
+
+/* States */
+.standing .dominoBody {
+  transform: rotateX(0deg) translateZ(0);
+}
+
+@keyframes cyberGatewayWarp {
+  0% {
+    transform: scale(1) translateY(0) translateZ(0) rotateX(0deg);
+    filter: brightness(1) blur(0px);
+    opacity: 1;
+  }
+  16% {
+    /* Kinetic anticipation recoil */
+    transform: scale(0.96) translateY(8px) translateZ(-30px) rotateX(-5deg);
+    filter: brightness(1.35) drop-shadow(0 0 25px var(--step-glow, rgba(168, 50, 255, 0.9)));
+    opacity: 1;
+  }
+  50% {
+    /* High-velocity forward surge through dimensional gateway */
+    transform: scale(1.08) translateY(-15px) translateZ(180px) rotateX(6deg);
+    filter: brightness(1.7) blur(2px) drop-shadow(0 0 50px var(--step-glow, rgba(168, 50, 255, 1)));
+    opacity: 0.85;
+  }
+  100% {
+    /* Warp breakthrough through the camera */
+    transform: scale(1.35) translateY(-40px) translateZ(480px) rotateX(12deg);
+    filter: brightness(2.2) blur(12px);
+    opacity: 0;
+  }
+}
+
+@keyframes cyberShadowPulse {
+  0% {
+    transform: rotateX(60deg) scale(0.9);
+    opacity: 0.35;
+  }
+  16% {
+    transform: rotateX(60deg) scale(0.78) translateY(-4px);
+    opacity: 0.55;
+  }
+  50% {
+    transform: rotateX(60deg) scale(1.4) translateY(18px);
+    opacity: 0.65;
+  }
+  100% {
+    transform: rotateX(60deg) scale(2.2) translateY(40px);
+    opacity: 0;
+  }
+}
+
+.falling .dominoBody {
+  animation: cyberGatewayWarp 0.56s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+}
+
+.falling .floorShadow {
+  animation: cyberShadowPulse 0.56s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+}
+
+.fallen .dominoBody {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fallen .floorShadow {
+  transform: rotateX(60deg) scale(1.4) translateY(40px);
+  opacity: 0.2;
+}
+
+/* Hover Interaction on Standing Domino */
+.standing.dominoWrapper:hover .dominoBody {
+  transform: rotateX(-4deg) rotateY(6deg) translateY(-8px);
+}
+
+.standing.dominoWrapper:hover .floorShadow {
+  transform: rotateX(60deg) scale(0.8) translateY(10px);
+  opacity: 0.3;
+}
+
+.frontFace {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #24163e 0%, #160c29 60%, #0d0618 100%);
+  border-radius: 14px;
+  border: 1px solid rgba(155, 48, 255, 0.35);
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.7),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.8),
+    0 0 25px rgba(155, 48, 255, 0.2);
+  transform: translateZ(12px);
+  backface-visibility: hidden;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Full Face Logo Cover */
+.hasFullLogo {
+  background: #140822;
+}
+
+.fullLogoBackground {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.fullLogoImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: contrast(1.15) brightness(1.05);
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.dominoWrapper:hover .fullLogoImage {
+  transform: scale(1.06);
+}
+
+.fullLogoOverlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 35%, rgba(10, 4, 20, 0.45) 90%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Layered Crossfading Slideshow */
+.slideshowLayer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 5s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity, transform;
+  pointer-events: none;
+}
+
+.slideshowLayerActive {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 2;
+}
+
+.glow .frontFace {
+  border-color: var(--step-color, rgba(180, 77, 255, 0.75));
+  box-shadow: 
+    0 20px 45px rgba(0, 0, 0, 0.8),
+    inset 0 1px 2px rgba(255, 255, 255, 0.35),
+    0 0 35px var(--step-glow, rgba(155, 48, 255, 0.45)),
+    0 0 60px var(--step-glow, rgba(155, 48, 255, 0.25));
+}
+
+/* Diagonal Surface Sheen */
+.surfaceSheen {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 45%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 55%
+  );
+  pointer-events: none;
+  transition: transform 0.6s ease;
+}
+
+.dominoWrapper:hover .surfaceSheen {
+  transform: translateY(20%) translateX(20%);
+}
+
+.innerBevel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+
+.dominoNumber {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--accent-secondary);
+  text-shadow: 0 0 12px rgba(180, 77, 255, 0.6);
+}
+
+.dominoCenter {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: auto 0;
+  width: 100%;
+}
+
+.dominoLogoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.dominoLogoImg {
+  width: clamp(52px, 6vw, 68px);
+  height: clamp(52px, 6vw, 68px);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 
+    0 0 20px rgba(155, 48, 255, 0.6),
+    0 0 35px rgba(180, 77, 255, 0.35);
+  pointer-events: none;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 1.8vw, 1.9rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.tagline {
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.dominoPivotIndicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 4px;
+}
+
+.dotIndicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-primary);
+  box-shadow: 0 0 8px var(--accent-primary);
+}
+
+/* 3D Depth Edges (Extrusion) */
+.sideRight {
+  position: absolute;
+  width: 24px;
+  height: 100%;
+  right: -12px;
+  top: 0;
+  background: linear-gradient(to right, #190e2e, #0e071a);
+  transform: rotateY(90deg);
+  border-radius: 2px;
+}
+
+.sideLeft {
+  position: absolute;
+  width: 24px;
+  height: 100%;
+  left: -12px;
+  top: 0;
+  background: linear-gradient(to left, #20133b, #120921);
+  transform: rotateY(-90deg);
+  border-radius: 2px;
+}
+
+.sideTop {
+  position: absolute;
+  width: 100%;
+  height: 24px;
+  top: -12px;
+  left: 0;
+  background: linear-gradient(to top, #2e1a4f, #1e1133);
+  transform: rotateX(90deg);
+  border-radius: 2px;
+}
+
+.sideBottom {
+  position: absolute;
+  width: 100%;
+  height: 24px;
+  bottom: -12px;
+  left: 0;
+  background: #090412;
+  transform: rotateX(-90deg);
+  border-radius: 2px;
+}
+
+.backFace {
+  position: absolute;
+  inset: 0;
+  background: #0d0617;
+  transform: translateZ(-12px) rotateY(180deg);
+  border-radius: 14px;
+}

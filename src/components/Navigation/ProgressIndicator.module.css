@@ -1,0 +1,118 @@
+.progressContainer {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: var(--z-progress);
+  user-select: none;
+  pointer-events: auto;
+}
+
+.textCount {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.currentNum {
+  color: var(--accent-secondary);
+}
+
+.divider {
+  opacity: 0.3;
+}
+
+.totalNum {
+  color: var(--text-muted);
+}
+
+.dotsWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(18, 10, 30, 0.7);
+  padding: 8px 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(155, 48, 255, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.dot {
+  width: 14px;
+  height: 22px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  outline: none;
+}
+
+.dot:hover {
+  border-color: var(--step-color, var(--accent-secondary));
+  background: var(--step-glow, rgba(155, 48, 255, 0.25));
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 0 12px var(--step-glow, rgba(155, 48, 255, 0.5));
+}
+
+.dot:focus-visible {
+  outline: 2px solid var(--step-color, var(--accent-primary));
+  outline-offset: 2px;
+}
+
+.dot.completed {
+  background: var(--step-color, rgba(180, 77, 255, 0.4));
+  border-color: var(--step-color, var(--accent-secondary));
+  opacity: 0.65;
+}
+
+.dot.active {
+  background: var(--step-color, var(--accent-primary));
+  border-color: #ffffff;
+  transform: scaleY(1.2) scaleX(1.08) translateY(-2px);
+  box-shadow: 0 0 15px var(--step-color, var(--accent-primary)), 0 0 25px var(--step-glow, rgba(155, 48, 255, 0.5));
+  opacity: 1;
+}
+
+.dotInner {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.dot.active .dotInner {
+  background-color: #ffffff;
+  box-shadow: 0 0 4px #ffffff;
+}
+
+@media (max-width: 768px) {
+  .progressContainer {
+    bottom: 16px;
+  }
+
+  .dotsWrapper {
+    gap: 8px;
+    padding: 6px 12px;
+  }
+
+  .dot {
+    width: 11px;
+    height: 18px;
+  }
+}

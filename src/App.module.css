@@ -1,0 +1,137 @@
+.appWrapper {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Ambient Radial Glows */
+.ambientGlows {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.orbTopLeft {
+  position: absolute;
+  top: -15%;
+  left: -10%;
+  width: 55vw;
+  height: 55vw;
+  max-width: 700px;
+  max-height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--ambient-accent-glow, rgba(155, 48, 255, 0.12)) 0%, transparent 70%);
+  filter: blur(80px);
+  transition: background 0.8s ease;
+}
+
+.orbBottomRight {
+  position: absolute;
+  bottom: -15%;
+  right: -10%;
+  width: 50vw;
+  height: 50vw;
+  max-width: 650px;
+  max-height: 650px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--ambient-secondary, rgba(180, 77, 255, 0.1)) 0%, transparent 70%);
+  filter: blur(80px);
+  transition: background 0.8s ease;
+}
+
+.cyberGrid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(155, 48, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(155, 48, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.6;
+}
+
+/* Floating Audio Toggle (Top Right) */
+.floatingSound {
+  position: fixed;
+  top: 24px;
+  right: clamp(16px, 4vw, 40px);
+  z-index: var(--z-nav);
+  pointer-events: auto;
+}
+
+/* Main Interactive Stage */
+.mainStage {
+  position: relative;
+  z-index: var(--z-base);
+  width: 100%;
+  max-width: var(--content-max-width);
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 40px clamp(16px, 4vw, 48px) 80px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: clamp(24px, 4vw, 50px);
+}
+
+.contentViewport {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 180px);
+}
+
+.robotViewport {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--z-robot);
+}
+
+/* Responsive Adaptations */
+@media (max-width: 1024px) {
+  .mainStage {
+    gap: 24px;
+    padding: 36px 20px 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .floatingSound {
+    top: 16px;
+    right: 16px;
+  }
+
+  .mainStage {
+    grid-template-columns: 1fr;
+    padding: 30px 16px 70px;
+    gap: 20px;
+  }
+
+  .contentViewport {
+    min-height: auto;
+    padding: 10px 0;
+    order: 2;
+  }
+
+  .robotViewport {
+    position: static;
+    transform: none;
+    order: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,144 @@
+.section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(20px, 4vh, 40px) 0;
+  text-align: center;
+  position: relative;
+}
+
+.ambientSpot {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(155, 48, 255, 0.25) 0%, rgba(10, 6, 16, 0.95) 70%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 800px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.categoryPill {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--accent-warm);
+  font-weight: 700;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  line-height: 1;
+  text-shadow: 0 0 40px rgba(155, 48, 255, 0.5);
+}
+
+.tagline {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  color: var(--accent-secondary);
+  font-style: italic;
+  max-width: 600px;
+}
+
+.solitaryDomino {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.ctaWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.btnContentWithLogo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btnLogoImg {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.ctaSubtext {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  max-width: 400px;
+}
+
+.philosophyChain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 10px 16px;
+  background: rgba(22, 12, 36, 0.6);
+  border: 1px solid rgba(155, 48, 255, 0.2);
+  border-radius: 9999px;
+}
+
+.stepWord {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+.stepWord:last-of-type {
+  color: var(--accent-warm);
+  font-weight: 700;
+}
+
+.stepArrow {
+  font-size: 0.72rem;
+  color: var(--accent-primary);
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.8rem;
+  }
+
+  .philosophyChain {
+    border-radius: 12px;
+    gap: 6px;
+  }
+}

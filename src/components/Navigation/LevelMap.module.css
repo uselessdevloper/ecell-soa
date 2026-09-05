@@ -1,0 +1,258 @@
+.levelMapLayer {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* When focused via the top-right button, dim the stage and showcase map */
+.focusedMode {
+  z-index: 999;
+  background: rgba(14, 17, 24, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  pointer-events: auto;
+}
+
+/* ============================================================
+   TOP-RIGHT CIRCULAR CONTROL BUTTON (Exact replica of reference)
+   ============================================================ */
+.topRightControlBtn {
+  position: fixed;
+  top: 24px;
+  right: clamp(74px, 8vw, 104px);
+  z-index: var(--z-nav, 100);
+  pointer-events: auto;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(30, 35, 48, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  outline: none;
+}
+
+.topRightControlBtn:hover {
+  background: rgba(45, 52, 70, 0.95);
+  border-color: #3b82f6;
+  color: #3b82f6;
+  transform: scale(1.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(59, 130, 246, 0.4);
+}
+
+/* Header Banner in Map Focus View */
+.focusHeaderBanner {
+  position: fixed;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(22, 28, 40, 0.85);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  padding: 6px 16px;
+  border-radius: 9999px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.focusHeaderBadge {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.15);
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.08em;
+}
+
+.focusHeaderText {
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-size: 0.8rem;
+  color: #e2e8f0;
+  font-weight: 500;
+}
+
+/* ============================================================
+   SVG TRACK & CURVE CONTAINER
+   ============================================================ */
+.svgTrackContainer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.mapSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* ============================================================
+   MILESTONE NODES (1 to 7)
+   ============================================================ */
+.mapNode {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 10;
+}
+
+.mapNode:hover {
+  transform: translate(-50%, -50%) scale(1.12);
+}
+
+/* Node Circle Body */
+.nodeCircle {
+  position: relative;
+  width: clamp(48px, 5.2vw, 64px);
+  height: clamp(48px, 5.2vw, 64px);
+  border-radius: 50%;
+  background: #252a38;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+.nodeNumber {
+  font-family: var(--font-display, sans-serif);
+  font-size: clamp(1.1rem, 1.4vw, 1.45rem);
+  font-weight: 700;
+  color: #cbd5e1;
+}
+
+/* Active Node: Vibrant Blue with Double Ring */
+.activeNode .nodeCircle {
+  background: #3b82f6;
+  border-color: #60a5fa;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.8), 0 0 24px rgba(59, 130, 246, 0.6);
+}
+
+.activeNode .nodeNumber {
+  color: #ffffff;
+  font-weight: 800;
+}
+
+/* Active Outer Ring (Concentric gap) */
+.activeOuterRing {
+  position: absolute;
+  width: calc(100% + 14px);
+  height: calc(100% + 14px);
+  border-radius: 50%;
+  border: 2px solid #3b82f6;
+  box-shadow: 0 0 14px rgba(59, 130, 246, 0.5);
+  pointer-events: none;
+}
+
+/* Pulsing Outer Halo */
+.activePulseHalo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #60a5fa;
+  animation: pulseRipple 2.2s infinite cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+
+@keyframes pulseRipple {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+/* Completed Node */
+.completedNode .nodeCircle {
+  background: #1e2638;
+  border-color: #3b82f6;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), 0 0 12px rgba(59, 130, 246, 0.3);
+}
+
+.completedNode .nodeNumber {
+  color: #60a5fa;
+}
+
+/* Locked Node: Darker Slate Body with Lock Badge */
+.lockedNode .nodeCircle {
+  background: #232734;
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.lockedNode .nodeNumber {
+  color: #64748b;
+}
+
+/* Padlock Badge (Perched at top-right of the circle) */
+.lockBadge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* Rating Stars under Active Node */
+.ratingStars {
+  display: flex;
+  gap: 3px;
+  margin-top: 5px;
+  color: #3b82f6;
+  font-size: 0.75rem;
+  letter-spacing: -0.05em;
+  filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.8));
+}
+
+/* Responsive Adaptations */
+@media (max-width: 768px) {
+  .topRightControlBtn {
+    top: 16px;
+    right: 68px;
+    width: 38px;
+    height: 38px;
+  }
+
+  .nodeCircle {
+    width: 38px;
+    height: 38px;
+  }
+
+  .nodeNumber {
+    font-size: 0.95rem;
+  }
+}

@@ -1,0 +1,241 @@
+.section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(20px, 4vh, 40px) 0;
+  text-align: center;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+.categoryPill {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--accent-secondary);
+  font-weight: 700;
+}
+
+.mainTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.4vw, 1.3rem);
+  color: var(--accent-warm);
+  letter-spacing: 0.08em;
+}
+
+.tagline {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.05vw, 1rem);
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.branchingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 960px;
+}
+
+.centerNode {
+  cursor: pointer;
+  margin-bottom: 4px;
+  transition: transform 0.3s ease;
+}
+
+.centerNode:hover {
+  transform: scale(1.08);
+}
+
+.hubCircle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #381d59 0%, #160c26 100%);
+  border: 2px solid var(--accent-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(155, 48, 255, 0.4);
+}
+
+.hubTitle {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.hubSub {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--accent-warm);
+  letter-spacing: 0.1em;
+}
+
+.teamsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(12px, 1.8vw, 20px);
+  width: 100%;
+}
+
+.teamCard {
+  background: rgba(22, 12, 36, 0.7);
+  border: 1px solid rgba(155, 48, 255, 0.25);
+  backdrop-filter: blur(8px);
+  padding: 16px 14px;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teamCard:hover {
+  border-color: var(--accent-secondary);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(155, 48, 255, 0.25);
+}
+
+.teamCard.selected {
+  border-color: var(--accent-secondary);
+  background: rgba(36, 18, 60, 0.85);
+  box-shadow: 0 0 20px rgba(180, 77, 255, 0.35);
+}
+
+.teamHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.teamIndex {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--accent-secondary);
+  font-weight: 700;
+}
+
+.teamName {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+}
+
+.teamHeadline {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--accent-warm);
+  font-style: italic;
+}
+
+.benefitsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.benefitBadge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(155, 48, 255, 0.15);
+  border: 1px solid rgba(155, 48, 255, 0.3);
+  color: var(--accent-tertiary);
+}
+
+.convergeCta {
+  margin-top: 10px;
+}
+
+/* YOU Section */
+.youArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.youGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, rgba(155, 48, 255, 0.35) 0%, transparent 70%);
+  filter: blur(25px);
+  pointer-events: none;
+}
+
+.youSub {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--accent-warm);
+  font-weight: 700;
+}
+
+.youTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.youTagline {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.youDominoWrapper {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.youHint {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+}
+
+@media (max-width: 860px) {
+  .teamsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .teamsGrid {
+    grid-template-columns: 1fr;
+  }
+}
