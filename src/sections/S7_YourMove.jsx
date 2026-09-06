@@ -66,17 +66,19 @@ const S7_YourMove = ({ isActive, sectionIndex = 6 }) => {
           </p>
         </div>
 
-        {/* Solitary Standing Domino */}
-        <div className={styles.solitaryDomino}>
+        {/* Solitary Standing Domino with authentic public folder photo */}
+        <div className={styles.solitaryDomino} title="Click to join the chain and register">
           <Domino 
-            number="07"
+            number="06"
             title="YOUR MOVE"
             tagline="Step into the chain"
+            fullFaceLogo="/your-move-banner.jpg"
             size="large"
             state="standing"
             glow={true}
             color={sectionData.color}
             glowColor={sectionData.glowColor}
+            onClick={handleRegisterClick}
           />
         </div>
 

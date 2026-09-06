@@ -244,6 +244,48 @@ export const useSoundManager = () => {
   }, [getContext]);
 
   /**
+   * Resonant Bubble Pop Sound:
+   * Crisp acoustic popping transient followed by a bright harmonic shimmer
+   */
+  const playBubblePop = useCallback((stageIndex = 0) => {
+    const ctx = getContext();
+    if (!ctx) return;
+
+    const scale = [392.00, 440.00, 523.25, 587.33, 659.25, 783.99, 880.00];
+    const baseFreq = scale[stageIndex % scale.length];
+    const now = ctx.currentTime;
+
+    // 1. Snappy bubble membrane pop (fast pitch envelope)
+    const oscPop = ctx.createOscillator();
+    const gainPop = ctx.createGain();
+    oscPop.type = 'sine';
+    oscPop.frequency.setValueAtTime(baseFreq * 0.7, now);
+    oscPop.frequency.exponentialRampToValueAtTime(baseFreq * 1.8, now + 0.04);
+    oscPop.frequency.exponentialRampToValueAtTime(baseFreq, now + 0.08);
+
+    gainPop.gain.setValueAtTime(0.35, now);
+    gainPop.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+
+    oscPop.connect(gainPop);
+    gainPop.connect(ctx.destination);
+    oscPop.start(now);
+    oscPop.stop(now + 0.2);
+
+    // 2. High sparkle splash
+    const oscSplash = ctx.createOscillator();
+    const gainSplash = ctx.createGain();
+    oscSplash.type = 'triangle';
+    oscSplash.frequency.setValueAtTime(baseFreq * 2.5, now);
+    gainSplash.gain.setValueAtTime(0.12, now);
+    gainSplash.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
+    oscSplash.connect(gainSplash);
+    gainSplash.connect(ctx.destination);
+    oscSplash.start(now);
+    oscSplash.stop(now + 0.36);
+  }, [getContext]);
+
+  /**
    * Climax / Celebration ethereal chime
    */
   const playSuccess = useCallback(() => {
@@ -279,6 +321,7 @@ export const useSoundManager = () => {
     playClick,
     playWhoosh,
     playRobotChirp,
+    playBubblePop,
     playSuccess,
     isReady: true
   };

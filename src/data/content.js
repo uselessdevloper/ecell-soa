@@ -11,25 +11,6 @@ export const DOMINO_SECTIONS = [
   {
     index: 0,
     number: "01",
-    id: "intro",
-    title: "INNOVATION & ENTREPRENEURSHIP CELL",
-    subtitle: "ITER · Siksha 'O' Anusandhan",
-    tagline: "Where ideas find direction.",
-    cta: "START THE CHAIN",
-    robotDialogues: [
-      "Welcome to the Innovation & Entrepreneurship Cell at ITER, Siksha 'O' Anusandhan! We're a student-driven community where innovation meets action. Click the domino to start the chain!"
-    ],
-    robotState: "talking",
-    theme: "hero",
-    color: "#a832ff",
-    colorSecondary: "#c86bff",
-    glowColor: "rgba(168, 50, 255, 0.7)",
-    note: "C4",
-    freq: 261.63
-  },
-  {
-    index: 1,
-    number: "02",
     id: "who-we-are",
     title: "WHO WE ARE",
     tag: "IEC-SOA",
@@ -37,7 +18,7 @@ export const DOMINO_SECTIONS = [
     subtagline: "Think beyond the classroom.",
     keywords: ["THINK", "CREATE", "BUILD"],
     robotDialogues: [
-      "IEC-SOA is built by students, for students who want to think beyond the classroom. We bring together innovators, mentors, and creators so your ideas never stay just ideas."
+      "Welcome to IEC-SOA! We are a student-powered launchpad for builders, thinkers, and creators who dare to think beyond the classroom. We connect you with top mentors and resources so your ideas become real ventures."
     ],
     robotState: "pointing",
     theme: "identity",
@@ -48,8 +29,8 @@ export const DOMINO_SECTIONS = [
     freq: 293.66
   },
   {
-    index: 2,
-    number: "03",
+    index: 1,
+    number: "02",
     id: "what-we-do",
     title: "WHAT WE DO",
     tagline: "Three connected pillars of growth.",
@@ -74,7 +55,7 @@ export const DOMINO_SECTIONS = [
       }
     ],
     robotDialogues: [
-      "We create the opportunities, connections and experiences that help ideas move forward."
+      "Three connected pillars fuel our ecosystem: high-stakes Events to compete, direct Mentorship from industry pioneers, and corporate Exposure to launch real-world products."
     ],
     robotState: "thinking",
     theme: "pillars",
@@ -85,8 +66,8 @@ export const DOMINO_SECTIONS = [
     freq: 329.63
   },
   {
-    index: 3,
-    number: "04",
+    index: 2,
+    number: "03",
     id: "events",
     title: "WHERE IDEAS COME ALIVE",
     subtitle: "EVENTS",
@@ -115,18 +96,10 @@ export const DOMINO_SECTIONS = [
         description: "Comprehensive entrepreneurial bootcamps and masterclasses taking you from zero to one. Master idea validation, customer discovery, minimum viable product (MVP) development, financial modeling, marketing psychology, and investor pitch deck crafting.",
         tags: ["IDEA VALIDATION", "MVP BUILDING", "FINANCIAL MODELING", "PITCH DECKS", "FOUNDER MENTORSHIP"],
         robotDialogue: "The Foundation Series is our ground-up startup masterclass! We bring in successful founders, mentors, and alumni to teach you idea validation, minimum viable products, branding, financial modeling, and winning investor pitch decks."
-      },
-      {
-        id: "resonance",
-        name: "RESONANCE",
-        tagline: "The Grand Induction & Cultural Conclave",
-        description: "The electrifying annual orientation and induction conclave welcoming freshers into the SOA entrepreneurship ecosystem. Packed with inspiring founder keynotes, interactive networking games, rapid ideation hack-sprints, and peer collaboration.",
-        tags: ["INDUCTION CONCLAVE", "FOUNDER KEYNOTES", "NETWORKING SPRINT", "RAPID IDEATION", "COMMUNITY LAUNCHPAD"],
-        robotDialogue: "Resonance is our grand annual orientation and induction conclave! It is where your entrepreneurial adventure begins with inspiring founder keynotes, interactive networking challenges, peer brainstorms, and community connection."
       }
     ],
     robotDialogues: [
-      "Here is where ideas come alive through flagship summits, business challenges, and hands-on workshops. Click Converge to see what awaits you!"
+      "Flagship conclaves, 36-hour hackathons, and founder masterclasses — this is where raw passion turns into scalable prototypes."
     ],
     convergenceTitle: "EXPERIENCE",
     convergenceDialogue: "And these are just some of the experiences waiting for you.",
@@ -139,8 +112,8 @@ export const DOMINO_SECTIONS = [
     freq: 392.00
   },
   {
-    index: 4,
-    number: "05",
+    index: 3,
+    number: "04",
     id: "teams",
     title: "FIND YOUR PLACE.",
     subtitle: "ONE E-CELL. SIX PATHS.",
@@ -184,7 +157,7 @@ export const DOMINO_SECTIONS = [
       }
     ],
     robotDialogues: [
-      "There is more than one way to be part of the chain. Choose your domain, develop practical skills, and collaborate with like-minded creators to shape impactful initiatives."
+      "Six specialized wings drive our community: Tech, Media, Events, PR, Content, and Design. Pick your domain and build serious portfolio projects!"
     ],
     robotState: "pointing",
     theme: "teams",
@@ -195,8 +168,8 @@ export const DOMINO_SECTIONS = [
     freq: 440.00
   },
   {
-    index: 5,
-    number: "06",
+    index: 4,
+    number: "05",
     id: "founders",
     title: "FROM IDEA TO IMPACT",
     subtitle: "MEET THE BUILDERS",
@@ -254,7 +227,7 @@ export const DOMINO_SECTIONS = [
     ],
     journeySteps: ["IDEA", "ACTION", "IMPACT"],
     robotDialogues: [
-      "Every major venture started with a single step. Meet founders who turned ambition into reality — topple the IDEA domino to complete the circuit!"
+      "Our alumni proof-of-concept: founders who started right where you are and scaled nationwide — from Biggies Burger (130+ stores) to AI-mobility pioneer driEV!"
     ],
     robotState: "thinking",
     theme: "founders",
@@ -265,8 +238,8 @@ export const DOMINO_SECTIONS = [
     freq: 523.25
   },
   {
-    index: 6,
-    number: "07",
+    index: 5,
+    number: "06",
     id: "your-move",
     title: "YOUR MOVE.",
     subtitle: "One small decision can start something much bigger.",
@@ -275,7 +248,7 @@ export const DOMINO_SECTIONS = [
       "IDEA", "DIRECTION", "ACTION", "EXPERIENCE", "PEOPLE", "OPPORTUNITY", "IMPACT"
     ],
     robotDialogues: [
-      "We've shown you what the chain reaction looks like. Now it's your move — click JOIN E-CELL to begin your journey with us!"
+      "Every major venture begins with a single domino. Your move starts now — click 'JOIN E-CELL' and take your first step with us!"
     ],
     robotState: "celebrating",
     theme: "climax",

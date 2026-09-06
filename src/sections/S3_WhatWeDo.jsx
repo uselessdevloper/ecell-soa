@@ -81,10 +81,16 @@ const S3_WhatWeDo = ({ isActive, sectionIndex = 2 }) => {
     }, 650);
   };
 
+  const PILLAR_PHOTOS = [
+    "/events-domino.jpg",
+    "/copy-dsc-0120.jpg",
+    "/exp-img-7878.jpg"
+  ];
+
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={styles.header}>
-        <span className={`fade-header ${styles.sectionTag}`}>DOMINO 03</span>
+        <span className={`fade-header ${styles.sectionTag}`}>DOMINO 02 · THREE PILLARS</span>
         <h2 className={`fade-header ${styles.title}`}>WHAT WE DO</h2>
         <p className={`fade-header ${styles.tagline}`}>Three interconnected pillars propelling ideas into action.</p>
       </div>
@@ -92,7 +98,7 @@ const S3_WhatWeDo = ({ isActive, sectionIndex = 2 }) => {
       <div 
         className={styles.chainContainer} 
         onClick={handleSequentialFall}
-        title="Click to trigger domino chain reaction"
+        title="Click to trigger domino chain reaction and advance"
       >
         {content.pillars.map((item, index) => (
           <React.Fragment key={index}>
@@ -105,10 +111,12 @@ const S3_WhatWeDo = ({ isActive, sectionIndex = 2 }) => {
                 title={item.title} 
                 description={item.description} 
                 tags={[item.tag]}
+                image={item.image || PILLAR_PHOTOS[index]}
                 state={fallingStates[index]}
                 isInteractive={true}
                 color={content.color}
                 glowColor={content.glowColor}
+                onClick={handleSequentialFall}
               />
             </div>
 

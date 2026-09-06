@@ -54,9 +54,22 @@ const S6_Founders = ({ isActive, sectionIndex = 5 }) => {
   return (
     <section className={styles.section} ref={containerRef}>
       <div className={styles.header}>
-        <span className={styles.categoryPill}>DOMINO 06 · ENTREPRENEURS & STARTUPS</span>
+        <span className={styles.categoryPill}>DOMINO 05 · ENTREPRENEURS & STARTUPS</span>
         <h2 className={styles.mainTitle}>FROM IDEA TO IMPACT</h2>
         <p className={styles.subtitle}>MEET THE BUILDERS & VENTURES</p>
+      </div>
+
+      {/* Real Stage Photo Showcase from public/ */}
+      <div className={styles.stageHeroBanner} title="E-Cell SOA Founders & Mentors Conclave">
+        <img 
+          src="/founders-stage.jpg" 
+          alt="Founders & Mentors on E-Cell SOA Stage" 
+          className={styles.stageHeroImg} 
+        />
+        <div className={styles.stageHeroOverlay}>
+          <span className={styles.stageHeroBadge}>LIVE STAGE // ITER CONCLAVE</span>
+          <p className={styles.stageHeroCaption}>Founders, angel investors & alumni leaders shaping SOA entrepreneurs.</p>
+        </div>
       </div>
 
       {/* Filter Tabs */}

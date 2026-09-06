@@ -60,18 +60,18 @@ const S5_Teams = ({ isActive, sectionIndex = 4 }) => {
   };
 
   const handleYouClick = () => {
-    playImpact(1.1);
+    playImpact(1.4);
     setYouDominoState('falling');
     setTimeout(() => {
-      setYouDominoState('fallen');
+      setYouDominoState('standing');
       triggerDomino(sectionIndex);
-    }, 600);
+    }, 450);
   };
 
   return (
     <section className={styles.section} ref={containerRef}>
       <div className={styles.header}>
-        <span className={styles.categoryPill}>DOMINO 05 · SIX PATHS</span>
+        <span className={styles.categoryPill}>DOMINO 04 · SIX PATHS</span>
         <h2 className={styles.mainTitle}>FIND YOUR PLACE.</h2>
         <h3 className={styles.subtitle}>ONE E-CELL. SIX PATHS.</h3>
         <p className={styles.tagline}>"Choose where you want to make your mark."</p>
@@ -80,8 +80,10 @@ const S5_Teams = ({ isActive, sectionIndex = 4 }) => {
       {!converged ? (
         <div className={styles.branchingContainer}>
           {/* Central Hub */}
-          <div className={styles.centerNode} onClick={handleConverge}>
+          <div className={styles.centerNode} onClick={handleConverge} title="Click to converge all paths into YOU">
             <div className={styles.hubCircle}>
+              <img src="/DSC07299.JPG" alt="IEC Team" className={styles.hubBgImg} />
+              <div className={styles.hubOverlay}></div>
               <span className={styles.hubTitle}>E-CELL</span>
               <span className={styles.hubSub}>CORE</span>
             </div>
@@ -134,9 +136,10 @@ const S5_Teams = ({ isActive, sectionIndex = 4 }) => {
 
           <div className={styles.youDominoWrapper}>
             <Domino 
-              number="05"
+              number="04"
               title="YOU"
-              tagline="Click to topple into Founders"
+              tagline="Click to advance into Founders"
+              fullFaceLogo="/team-you.jpg"
               size="large"
               state={youDominoState}
               glow={true}
@@ -147,7 +150,7 @@ const S5_Teams = ({ isActive, sectionIndex = 4 }) => {
           </div>
 
           <p className={styles.youHint}>
-            Click the YOU domino to advance the story
+            Click the YOU domino to advance the story →
           </p>
         </div>
       )}

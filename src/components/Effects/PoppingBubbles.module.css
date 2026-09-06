@@ -1,0 +1,249 @@
+.bubblesContainer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-background, 0);
+  overflow: hidden;
+}
+
+/* Individual Floating Iridescent Soap Bubble */
+.bubbleItem {
+  position: absolute;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: auto;
+  transform-style: preserve-3d;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease;
+  user-select: none;
+}
+
+.bubbleItem:hover {
+  transform: scale(1.15) !important;
+  filter: drop-shadow(0 0 25px rgba(0, 240, 255, 0.6)) drop-shadow(0 0 15px rgba(255, 60, 180, 0.5)) !important;
+}
+
+/* Photorealistic Iridescent Soap Bubble Body (Matching Reference Image) */
+.bubbleSphere {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+  /* Translucent glassy membrane with magenta-to-cyan rainbow refractive dispersion */
+  background: 
+    radial-gradient(ellipse at 70% 75%, rgba(0, 240, 255, 0.25) 0%, transparent 50%),
+    radial-gradient(ellipse at 25% 75%, rgba(255, 42, 166, 0.28) 0%, transparent 50%),
+    radial-gradient(circle at 40% 35%, rgba(255, 255, 255, 0.22) 0%, rgba(155, 48, 255, 0.12) 60%, transparent 85%);
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(2.5px);
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 
+    inset 4px 4px 14px rgba(255, 255, 255, 0.75),
+    inset -4px -4px 16px rgba(0, 240, 255, 0.65),
+    inset 0 0 20px rgba(255, 42, 166, 0.55),
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 0 22px rgba(0, 240, 255, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Specular Primary Crescent Highlight (Top Left - Frame 1) */
+.specularGlint {
+  position: absolute;
+  top: 8%;
+  left: 14%;
+  width: 44%;
+  height: 28%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.45) 40%, transparent 75%);
+  transform: rotate(-35deg);
+  pointer-events: none;
+}
+
+/* Secondary Rim Glint (Bottom Right) */
+.specularSecondary {
+  position: absolute;
+  bottom: 10%;
+  right: 14%;
+  width: 30%;
+  height: 18%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.85) 0%, transparent 70%);
+  transform: rotate(25deg);
+  pointer-events: none;
+}
+
+/* Inner Number / Logo Mark */
+.bubbleLabel {
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(0.72rem, 1.1vw, 0.98rem);
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 240, 255, 0.7);
+  letter-spacing: 0.05em;
+  z-index: 2;
+}
+
+.stageName {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #e8faff;
+  text-transform: uppercase;
+  margin-top: 1px;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+  z-index: 2;
+}
+
+/* Fullscreen Burst Canvas */
+.burstCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 150;
+}
+
+/* Top Scattered HUD Indicator Dock */
+/* Apple VisionOS Floating Liquid Glass HUD Capsule Dock */
+.floatingHudBar {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  background: 
+    radial-gradient(ellipse at 30% 0%, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.06) 50%, rgba(0, 240, 255, 0.08) 85%, rgba(155, 48, 255, 0.12) 100%),
+    rgba(14, 8, 24, 0.65);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  border-radius: 9999px;
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  box-shadow: 
+    inset 0 1.5px 3px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 6px rgba(0, 240, 255, 0.3),
+    0 12px 36px rgba(0, 0, 0, 0.55),
+    0 0 20px rgba(0, 240, 255, 0.2);
+  z-index: 40;
+  user-select: none;
+  pointer-events: auto;
+}
+
+/* Home Button: Liquid Glass Sub-Pill */
+.hudHomeBtn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.4);
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hudHomeBtn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.7);
+  transform: scale(1.05);
+  box-shadow: 
+    inset 0 1px 3px rgba(255, 255, 255, 0.8),
+    0 0 14px rgba(0, 240, 255, 0.5);
+}
+
+/* VisionOS Liquid Glass Stage Number Orb (Replica of circular control buttons) */
+.hudOrbBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.4) 0%, var(--orb-color) 70%, rgba(14, 8, 26, 0.6) 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 255, 255, 0.9),
+    inset 0 -2px 5px var(--orb-glow),
+    0 4px 12px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top-left specular glint */
+.hudOrbBtn::before {
+  content: '';
+  position: absolute;
+  top: 8%;
+  left: 14%;
+  width: 40%;
+  height: 25%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.35) 50%, transparent 80%);
+  transform: rotate(-30deg);
+  pointer-events: none;
+}
+
+.hudOrbBtn:hover {
+  transform: scale(1.22);
+  border-color: #ffffff;
+  box-shadow: 
+    inset 0 2px 5px rgba(255, 255, 255, 1),
+    inset 0 -2px 6px var(--orb-glow),
+    0 0 20px var(--orb-glow),
+    0 6px 18px rgba(0, 0, 0, 0.5);
+}
+
+.hudOrbActive {
+  transform: scale(1.28);
+  border-color: #ffffff;
+  background: radial-gradient(circle at 35% 25%, #ffffff 0%, var(--orb-color) 60%, rgba(10, 5, 20, 0.7) 100%);
+  box-shadow: 
+    inset 0 2px 6px #ffffff,
+    0 0 24px var(--orb-glow),
+    0 0 12px #ffffff;
+}
+
+@media (max-width: 768px) {
+  .floatingHudBar {
+    top: 14px;
+    padding: 6px 12px;
+    gap: 8px;
+  }
+
+  .hudOrbBtn {
+    width: 22px;
+    height: 22px;
+    font-size: 0.52rem;
+  }
+
+  .hudHomeBtn {
+    font-size: 0.6rem;
+  }
+
+  .bubbleItem {
+    transform: scale(0.75) !important;
+  }
+}

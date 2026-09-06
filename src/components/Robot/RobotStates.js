@@ -1,66 +1,51 @@
 export const ROBOT_STATES = {
   idle: {
-    head: { rotation: 0, y: 0, duration: 2, ease: "sine.inOut", yoyo: true, repeat: -1 },
-    leftArm: { rotation: -8, duration: 2, ease: "sine.inOut", yoyo: true, repeat: -1 },
-    rightArm: { rotation: 8, duration: 2, ease: "sine.inOut", yoyo: true, repeat: -1 },
-    body: { y: 0, duration: 2, ease: "sine.inOut", yoyo: true, repeat: -1 },
-    antenna: { rotation: 4, duration: 1.5, ease: "sine.inOut", yoyo: true, repeat: -1 },
-    mouthShape: 'normal'
+    head: { rotation: 0, rotationY: 0, rotationX: 0, x: 0, y: 0, scale: 1, duration: 2.2, ease: "sine.inOut", yoyo: true, repeat: -1 },
+    earGlow: 0.8,
+    mouthShape: 'normal',
+    laserVisible: false
   },
   talking: {
-    head: { rotation: 3, y: -2, duration: 0.4, ease: "sine.inOut", yoyo: true, repeat: -1 },
-    leftArm: { rotation: -26, duration: 0.7, ease: "sine.inOut", yoyo: true, repeat: -1 },
-    rightArm: { rotation: 16, duration: 0.8, ease: "sine.inOut", yoyo: true, repeat: -1 },
-    body: { y: -2, duration: 0.8, ease: "sine.inOut", yoyo: true, repeat: -1 },
-    antenna: { rotation: 8, duration: 0.3, ease: "sine.inOut", yoyo: true, repeat: -1 },
-    mouthShape: 'talking'
+    head: { rotation: 3, rotationY: -4, rotationX: -2, x: -2, y: -4, scale: 1.02, duration: 0.35, ease: "sine.inOut", yoyo: true, repeat: -1 },
+    earGlow: 1.2,
+    mouthShape: 'talking',
+    laserVisible: false
   },
   looking: {
-    head: { rotation: -12, y: -4, duration: 0.6, ease: "power2.out" },
-    leftArm: { rotation: -16, duration: 0.6, ease: "power2.out" },
-    rightArm: { rotation: 10, duration: 0.6, ease: "power2.out" },
-    body: { y: -3, duration: 0.6, ease: "power2.out" },
-    antenna: { rotation: -15, duration: 0.5, ease: "power2.out" },
-    mouthShape: 'normal'
+    head: { rotation: -8, rotationY: -15, rotationX: 2, x: -8, y: -2, scale: 1, duration: 0.6, ease: "power2.out" },
+    earGlow: 0.9,
+    mouthShape: 'normal',
+    laserVisible: false
   },
   pointing: {
-    head: { rotation: -10, y: -4, duration: 0.5, ease: "power2.out" },
-    leftArm: { rotation: -68, duration: 0.5, ease: "back.out(1.4)" },
-    rightArm: { rotation: 12, duration: 0.5, ease: "power2.out" },
-    body: { y: -4, duration: 0.5, ease: "power2.out" },
-    antenna: { rotation: -12, duration: 0.4, ease: "power2.out" },
-    mouthShape: 'talking'
+    head: { rotation: -12, rotationY: -20, rotationX: 4, x: -16, y: -4, scale: 1.03, duration: 0.55, ease: "back.out(1.4)" },
+    earGlow: 1.3,
+    mouthShape: 'talking',
+    laserVisible: true
   },
   thinking: {
-    head: { rotation: -16, y: -8, duration: 0.8, ease: "power2.inOut" },
-    leftArm: { rotation: -44, duration: 0.8, ease: "power2.inOut" },
-    rightArm: { rotation: 10, duration: 0.8, ease: "power2.inOut" },
-    body: { y: 4, duration: 0.8, ease: "power2.inOut" },
-    antenna: { rotation: -22, duration: 0.8, ease: "power2.inOut" },
-    mouthShape: 'straight'
+    head: { rotation: 6, rotationY: 12, rotationX: -8, x: 4, y: -8, scale: 0.98, duration: 0.8, ease: "power2.inOut" },
+    earGlow: 0.6,
+    mouthShape: 'straight',
+    laserVisible: false
   },
   excited: {
-    head: { rotation: 0, y: -14, duration: 0.25, ease: "power1.inOut", yoyo: true, repeat: -1 },
-    leftArm: { rotation: -115, duration: 0.25, ease: "power1.inOut", yoyo: true, repeat: -1 },
-    rightArm: { rotation: 115, duration: 0.25, ease: "power1.inOut", yoyo: true, repeat: -1 },
-    body: { y: -12, duration: 0.25, ease: "power1.inOut", yoyo: true, repeat: -1 },
-    antenna: { rotation: 0, scaleY: 1.4, duration: 0.15, ease: "power1.inOut", yoyo: true, repeat: -1 },
-    mouthShape: 'open'
+    head: { rotation: 0, rotationY: 0, rotationX: -4, x: 0, y: -16, scale: 1.06, duration: 0.22, ease: "power1.inOut", yoyo: true, repeat: -1 },
+    earGlow: 1.5,
+    mouthShape: 'open',
+    laserVisible: false
   },
   celebrating: {
-    head: { rotation: 8, y: -12, duration: 0.35, ease: "sine.inOut", yoyo: true, repeat: -1 },
-    leftArm: { rotation: -130, duration: 0.35, ease: "sine.inOut", yoyo: true, repeat: -1 },
-    rightArm: { rotation: 130, duration: 0.35, ease: "sine.inOut", yoyo: true, repeat: -1 },
-    body: { y: -10, rotation: 4, duration: 0.35, ease: "sine.inOut", yoyo: true, repeat: -1 },
-    antenna: { rotation: 20, duration: 0.2, ease: "sine.inOut", yoyo: true, repeat: -1 },
-    mouthShape: 'open'
+    head: { rotation: 6, rotationY: 8, rotationX: -6, x: 0, y: -14, scale: 1.08, duration: 0.3, ease: "sine.inOut", yoyo: true, repeat: -1 },
+    earGlow: 1.6,
+    mouthShape: 'open',
+    laserVisible: false
   },
   reacting: {
-    head: { rotation: -15, y: 10, scale: 1.1, duration: 0.2, ease: "back.out(2)" },
-    leftArm: { rotation: -50, duration: 0.2, ease: "power2.out" },
-    rightArm: { rotation: 50, duration: 0.2, ease: "power2.out" },
-    body: { y: 8, duration: 0.2, ease: "power2.out" },
-    antenna: { rotation: 30, duration: 0.15, ease: "power2.out" },
-    mouthShape: 'open'
+    head: { rotation: -6, rotationY: -8, rotationX: 6, x: -6, y: 8, scale: 1.04, duration: 0.2, ease: "back.out(2)" },
+    earGlow: 1.4,
+    mouthShape: 'open',
+    laserVisible: false
   }
 };
+

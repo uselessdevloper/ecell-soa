@@ -11,6 +11,7 @@ const MiniDomino = ({
   description,
   desc,
   tags = [],
+  image,
   frontContent,
   children,
   isActive = false,
@@ -49,7 +50,7 @@ const MiniDomino = ({
 
   return (
     <div 
-      className={rootClass}
+      className={rootClass} 
       style={customStyle}
       onClick={isInteractive ? handleClick : undefined}
       role={isInteractive && onClick ? "button" : undefined}
@@ -64,7 +65,14 @@ const MiniDomino = ({
     >
       <div className={styles.miniShadow}></div>
       <div className={styles.mini3d}>
-        <div className={styles.face}>
+        <div className={`${styles.face} ${image ? styles.hasImage : ''}`}>
+          {image && (
+            <div className={styles.imageLayer}>
+              <img src={image} alt={displayTitle || "Pillar photo"} className={styles.miniBgImg} />
+              <div className={styles.miniGradientOverlay}></div>
+            </div>
+          )}
+
           {displayNum && <span className={styles.miniNumber}>{displayNum}</span>}
 
           {frontContent ? (

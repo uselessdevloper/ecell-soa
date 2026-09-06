@@ -39,6 +39,74 @@
   letter-spacing: 0.1em;
 }
 
+/* Photo Banner Showcase */
+.stageHeroBanner {
+  position: relative;
+  width: 100%;
+  max-width: 860px;
+  height: clamp(140px, 18vh, 190px);
+  margin: 0 auto 16px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(41, 121, 255, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(41, 121, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.stageHeroBanner:hover {
+  border-color: rgba(0, 240, 255, 0.7);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8), 0 0 30px rgba(41, 121, 255, 0.4);
+}
+
+.stageHeroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: grayscale(100%) contrast(1.12) brightness(0.9);
+  transition: filter 0.6s ease, transform 0.6s ease;
+}
+
+.stageHeroBanner:hover .stageHeroImg {
+  filter: grayscale(0%) contrast(1.08) brightness(1.05) saturate(1.2);
+  transform: scale(1.04);
+}
+
+.stageHeroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(14, 7, 26, 0.3) 0%, transparent 40%, rgba(10, 5, 20, 0.85) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px 18px;
+  pointer-events: none;
+}
+
+.stageHeroBadge {
+  align-self: flex-start;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #00f0ff;
+  letter-spacing: 0.1em;
+  background: rgba(14, 7, 26, 0.75);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  padding: 3px 8px;
+  border-radius: 9999px;
+  backdrop-filter: blur(8px);
+}
+
+.stageHeroCaption {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.78rem;
+  color: #f1f5f9;
+  margin: 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
 /* Filter Tabs */
 .filterPillsRow {
   display: flex;

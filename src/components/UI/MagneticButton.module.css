@@ -78,39 +78,75 @@
   box-shadow: 0 0 0 2px var(--bg-primary), 0 0 0 4px var(--accent-primary);
 }
 
-/* Sound Toggle Button */
+/* Apple VisionOS Liquid Glass Sound Toggle Capsule */
 .soundToggleBtn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(26, 16, 46, 0.6);
-  border: 1px solid rgba(155, 48, 255, 0.25);
+  gap: 10px;
+  background: 
+    radial-gradient(ellipse at 25% 15%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(0, 240, 255, 0.08) 85%, rgba(155, 48, 255, 0.12) 100%),
+    rgba(14, 8, 24, 0.6);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
   border-radius: 9999px;
-  padding: 6px 14px;
-  color: var(--text-secondary);
+  padding: 5px 14px 5px 6px;
+  color: #ffffff;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   cursor: pointer;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition: all 0.25s ease;
-  min-height: 36px;
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  box-shadow: 
+    inset 0 1.5px 3px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 6px rgba(0, 240, 255, 0.3),
+    0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  min-height: 38px;
+  user-select: none;
 }
 
 .soundToggleBtn:hover {
-  background: rgba(155, 48, 255, 0.2);
-  border-color: var(--accent-secondary);
-  color: #ffffff;
-  box-shadow: 0 0 12px rgba(155, 48, 255, 0.3);
+  transform: translateY(-2px) scale(1.04);
+  border-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 
+    inset 0 2px 5px rgba(255, 255, 255, 0.95),
+    inset 0 -2px 8px rgba(0, 240, 255, 0.5),
+    0 12px 30px rgba(0, 0, 0, 0.5),
+    0 0 18px rgba(0, 240, 255, 0.35);
 }
 
-.soundIcon {
-  font-size: 0.95rem;
+.soundToggleBtn:active {
+  transform: scale(0.96);
+}
+
+/* Luminous circular sub-orb for the sound glyph */
+.soundSubOrb {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 25%, #ffffff 0%, #e2f6ff 50%, rgba(180, 230, 255, 0.75) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 
+    0 0 12px rgba(255, 255, 255, 0.7),
+    0 0 8px rgba(0, 240, 255, 0.4),
+    inset 0 1px 2px #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0c0818;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.soundToggleBtn:hover .soundSubOrb {
+  transform: scale(1.08);
 }
 
 .soundLabel {
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 @media (max-width: 600px) {
@@ -118,6 +154,7 @@
     display: none;
   }
   .soundToggleBtn {
-    padding: 6px 10px;
+    padding: 5px;
+    min-height: auto;
   }
 }

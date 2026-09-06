@@ -8,7 +8,7 @@ const NavControls = () => {
   const { playClick } = useSoundManager();
 
   const canGoPrev = currentDomino > 0 && !isTransitioning;
-  const canGoNext = currentDomino < 6 && !isTransitioning;
+  const canGoNext = currentDomino < 5 && !isTransitioning;
 
   const handlePrev = React.useCallback(() => {
     if (!canGoPrev) return;

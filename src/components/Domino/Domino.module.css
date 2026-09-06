@@ -115,67 +115,44 @@
   transform: rotateX(0deg) translateZ(0);
 }
 
-@keyframes cyberGatewayWarp {
+@keyframes cyberClickPulse {
   0% {
-    transform: scale(1) translateY(0) translateZ(0) rotateX(0deg);
-    filter: brightness(1) blur(0px);
-    opacity: 1;
+    transform: scale(1) translateY(0) rotateX(0deg);
+    filter: brightness(1);
   }
-  16% {
-    /* Kinetic anticipation recoil */
-    transform: scale(0.96) translateY(8px) translateZ(-30px) rotateX(-5deg);
-    filter: brightness(1.35) drop-shadow(0 0 25px var(--step-glow, rgba(168, 50, 255, 0.9)));
-    opacity: 1;
+  25% {
+    transform: scale(0.96) translateY(6px) rotateX(-8deg);
+    filter: brightness(1.3) drop-shadow(0 0 30px var(--step-glow, rgba(0, 240, 255, 0.9)));
   }
-  50% {
-    /* High-velocity forward surge through dimensional gateway */
-    transform: scale(1.08) translateY(-15px) translateZ(180px) rotateX(6deg);
-    filter: brightness(1.7) blur(2px) drop-shadow(0 0 50px var(--step-glow, rgba(168, 50, 255, 1)));
-    opacity: 0.85;
+  65% {
+    transform: scale(1.03) translateY(-6px) rotateX(4deg);
+    filter: brightness(1.15) drop-shadow(0 0 20px var(--step-glow, rgba(0, 240, 255, 0.6)));
   }
   100% {
-    /* Warp breakthrough through the camera */
-    transform: scale(1.35) translateY(-40px) translateZ(480px) rotateX(12deg);
-    filter: brightness(2.2) blur(12px);
-    opacity: 0;
-  }
-}
-
-@keyframes cyberShadowPulse {
-  0% {
-    transform: rotateX(60deg) scale(0.9);
-    opacity: 0.35;
-  }
-  16% {
-    transform: rotateX(60deg) scale(0.78) translateY(-4px);
-    opacity: 0.55;
-  }
-  50% {
-    transform: rotateX(60deg) scale(1.4) translateY(18px);
-    opacity: 0.65;
-  }
-  100% {
-    transform: rotateX(60deg) scale(2.2) translateY(40px);
-    opacity: 0;
+    transform: scale(1) translateY(0) rotateX(0deg);
+    filter: brightness(1);
+    opacity: 1;
   }
 }
 
 .falling .dominoBody {
-  animation: cyberGatewayWarp 0.56s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+  animation: cyberClickPulse 0.45s cubic-bezier(0.25, 1, 0.3, 1);
 }
 
 .falling .floorShadow {
-  animation: cyberShadowPulse 0.56s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+  transform: rotateX(60deg) scale(1.2) translateY(16px);
+  opacity: 0.55;
+  transition: transform 0.45s ease, opacity 0.45s ease;
 }
 
 .fallen .dominoBody {
-  opacity: 0;
-  pointer-events: none;
+  transform: rotateX(0deg) translateZ(0);
+  opacity: 1;
 }
 
 .fallen .floorShadow {
-  transform: rotateX(60deg) scale(1.4) translateY(40px);
-  opacity: 0.2;
+  transform: rotateX(60deg) scale(0.9) translateY(0);
+  opacity: 0.35;
 }
 
 /* Hover Interaction on Standing Domino */
@@ -225,20 +202,27 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  filter: contrast(1.15) brightness(1.05);
-  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  filter: grayscale(100%) contrast(1.1) brightness(0.92);
+  transition: filter 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.dominoWrapper:hover .fullLogoImage {
-  transform: scale(1.06);
+.dominoWrapper:hover .fullLogoImage,
+.dominoWrapper.active .fullLogoImage {
+  filter: grayscale(0%) contrast(1.05) brightness(1.06) saturate(1.22);
+  transform: scale(1.05);
 }
 
 .fullLogoOverlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, transparent 35%, rgba(10, 4, 20, 0.45) 90%);
+  background: linear-gradient(
+    180deg,
+    rgba(14, 7, 24, 0.25) 0%,
+    transparent 45%,
+    rgba(10, 4, 18, 0.72) 100%
+  );
   pointer-events: none;
-  z-index: 3;
+  z-index: 2;
 }
 
 /* Layered Crossfading Slideshow */
@@ -300,7 +284,19 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  z-index: 2;
+  z-index: 4;
+}
+
+.hasFullLogo .dominoCenter {
+  background: rgba(14, 7, 26, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  padding: 10px 18px;
+  margin-top: auto;
+  margin-bottom: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
 }
 
 .dominoNumber {
