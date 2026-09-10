@@ -8,10 +8,10 @@ import styles from './S2_WhoWeAre.module.css';
 import StageHeader from '../components/UI/StageHeader';
 
 const METRICS = [
-  { value: '80+',  label: 'MEMBERS',  color: '#00f0ff' },
+  { value: '80+',  label: 'MEMBERS',  color: '#c084fc' },
   { value: '250+', label: 'ALUMNIES', color: '#c084fc' },
-  { value: '5+',   label: 'STARTUPS', color: '#ffb800' },
-  { value: '10+',  label: 'EVENTS / YEAR', color: '#f43f5e' },
+  { value: '5+',   label: 'STARTUPS', color: '#c084fc' },
+  { value: '10+',  label: 'EVENTS / YEAR', color: '#c084fc' },
 ];
 
 const S2_WhoWeAre = ({ isActive, sectionIndex = 0 }) => {
@@ -57,9 +57,7 @@ const S2_WhoWeAre = ({ isActive, sectionIndex = 0 }) => {
 
           <h2 className={styles.statement}>
             Nurturing the next generation of&nbsp;
-            <span className={styles.accentWord}>founders</span>,&nbsp;
-            <span className={styles.accentWord2}>builders</span>&nbsp;&amp;&nbsp;
-            <span className={styles.accentWord3}>innovators</span>.
+            <span className={styles.accentWord3}>founders, builders &amp; innovators</span>.
           </h2>
 
           <p className={styles.bodyText}>

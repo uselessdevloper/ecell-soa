@@ -78,16 +78,8 @@
   letter-spacing: 0.01em;
 }
 
-.accentWord {
-  color: #00f0ff;
-  text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
-}
-
-.accentWord2 {
-  color: #c084fc;
-  text-shadow: 0 0 20px rgba(192, 132, 252, 0.5);
-}
-
+.accentWord,
+.accentWord2,
 .accentWord3 {
   color: #ffb800;
   text-shadow: 0 0 20px rgba(255, 184, 0, 0.5);

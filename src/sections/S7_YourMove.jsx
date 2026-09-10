@@ -69,7 +69,7 @@ const S7_YourMove = ({ isActive, sectionIndex = 5 }) => {
 
   const handleRegisterClick = () => {
     playClick();
-    const targetUrl = BRAND.registrationUrl || 'https://registration.ecellsoa.com';
+    const targetUrl = BRAND.registrationUrl || 'https://startup-brawl.vercel.app/';
     window.open(targetUrl, '_blank', 'noopener,noreferrer');
   };
 
@@ -132,10 +132,10 @@ const S7_YourMove = ({ isActive, sectionIndex = 5 }) => {
               type="button"
               className={styles.joinIecBtn}
               onClick={handleRegisterClick}
-              aria-label="Register and Join IEC-SOA"
+              aria-label="Take us to the next part - Startup Brawl"
             >
               <img src="/iec-logo.png" alt="IEC Logo" className={styles.btnIecLogo} />
-              <span>JOIN IEC-SOA →</span>
+              <span>TAKE US TO THE NEXT PART →</span>
             </button>
             <span className={styles.registrationHint}>
               Official Innovation & Entrepreneurship Cell · ITER Orientation

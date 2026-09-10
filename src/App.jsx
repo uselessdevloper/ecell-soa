@@ -1,8 +1,6 @@
 import React, { useRef, useEffect } from 'react';
-import gsap from 'gsap';
 import { DominoProvider, useDomino } from './context/DominoContext';
 import ParticleCanvas from './components/Effects/ParticleCanvas';
-import StageTransitionOverlay from './components/Effects/StageTransitionOverlay';
 import FrontPage from './components/Hero/FrontPage';
 import LevelMap from './components/Navigation/LevelMap';
 import Robot from './components/Robot/Robot';
@@ -47,35 +45,9 @@ const MainApp = () => {
 
   const isFrontPage = currentDomino === -1;
 
-  // Silky-Smooth Stage Reveal when active stage updates
-  useEffect(() => {
-    if (!sectionContainerRef.current || prefersReducedMotion || isFrontPage) return;
-
-    const startY = direction === 'backward' ? -28 : 28;
-
-    gsap.fromTo(
-      sectionContainerRef.current,
-      { 
-        opacity: 0, 
-        y: startY, 
-        scale: 0.97, 
-        filter: 'blur(6px)' 
-      },
-      { 
-        opacity: 1, 
-        y: 0, 
-        scale: 1, 
-        filter: 'blur(0px)', 
-        duration: 0.65, 
-        ease: 'power3.out' 
-      }
-    );
-  }, [currentDomino, direction, prefersReducedMotion, isFrontPage]);
-
   // Ultra-Smooth Scroll Navigation with Momentum Lock
   useEffect(() => {
     const handleWheel = (e) => {
-      // Locked while 1-second overlay transition is active
       if (isTransitioning || wheelLockRef.current) return;
 
       // Ignore micro trackpad tremors
@@ -84,17 +56,7 @@ const MainApp = () => {
       wheelLockRef.current = true;
       setTimeout(() => {
         wheelLockRef.current = false;
-      }, 1050);
-
-      // Subtle smooth parallax hint
-      if (sectionContainerRef.current && !prefersReducedMotion) {
-        const nudgeY = e.deltaY > 0 ? -12 : 12;
-        gsap.to(sectionContainerRef.current, {
-          y: nudgeY,
-          duration: 0.2,
-          ease: 'power2.out'
-        });
-      }
+      }, 350);
 
       if (e.deltaY > 0) {
         nextSection();
@@ -107,7 +69,7 @@ const MainApp = () => {
     return () => {
       window.removeEventListener('wheel', handleWheel);
     };
-  }, [isTransitioning, nextSection, prevSection, prefersReducedMotion]);
+  }, [isTransitioning, nextSection, prevSection]);
 
   // Touch swipe navigation
   useEffect(() => {
@@ -179,9 +141,6 @@ const MainApp = () => {
         '--ambient-secondary': currentSectionData?.colorSecondary || '#00f0ff',
       }}
     >
-      {/* 1-Second E-Cell SOA Animated Logo Slide Transition Overlay */}
-      <StageTransitionOverlay />
-
       {/* 1. FRONT PAGE HERO VIEW (When currentDomino is -1) */}
       {isFrontPage ? (
         <FrontPage 

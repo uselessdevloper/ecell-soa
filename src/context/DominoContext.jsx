@@ -50,44 +50,20 @@ export const DominoProvider = ({ children }) => {
 
   /**
    * Directly navigate to a specific section (-1 for Front Page, 0-5 for stages)
-   * with the 1-second E-Cell SOA animated logo overlay.
+   * immediately without delay or transition overlay.
    */
   const goToSection = useCallback((index) => {
-    if (isTransitioning || index < -1 || index > 5 || index === currentDomino) return;
+    if (index < -1 || index > 5 || index === currentDomino) return;
 
-    setIsTransitioning(true);
-    setTargetDomino(index);
-    setDirection(index >= currentDomino ? 'forward' : 'backward');
-    setRobotState('excited');
-
-    // Domino kinetic reaction
-    setDominoStates((prev) => {
-      const copy = [...prev];
-      if (currentDomino >= 0 && currentDomino < 6) {
-        copy[currentDomino] = 'falling';
-      }
-      return copy;
-    });
-
-    // Particle burst spark
-    setTimeout(() => {
-      setBurstTrigger(Date.now());
-    }, 100);
-
-    // Midway through the 1-second overlay (~480ms): mount the new section behind the opaque overlay
     if (transitionTimerRef.current) clearTimeout(transitionTimerRef.current);
-    transitionTimerRef.current = setTimeout(() => {
-      setDominoStates(Array(6).fill('standing'));
-      setCurrentDomino(index);
-    }, 480);
-
-    // At 1000ms: Overlay finishes its 1-second lifecycle and dissolves smoothly
     if (finishTimerRef.current) clearTimeout(finishTimerRef.current);
-    finishTimerRef.current = setTimeout(() => {
-      setIsTransitioning(false);
-      setTargetDomino(null);
-    }, 1000);
-  }, [currentDomino, isTransitioning]);
+
+    setDominoStates(Array(6).fill('standing'));
+    setCurrentDomino(index);
+    setDirection(index >= currentDomino ? 'forward' : 'backward');
+    setIsTransitioning(false);
+    setTargetDomino(null);
+  }, [currentDomino]);
 
   /**
    * Domino topple trigger: falls forward into the next stage

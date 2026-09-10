@@ -3,7 +3,7 @@ export const BRAND = {
   fullName: "Innovation & Entrepreneurship Cell",
   institution: "ITER · Siksha 'O' Anusandhan",
   tagline: "Where ideas find direction.",
-  registrationUrl: "https://registration.ecellsoa.com", // PocketBase connected registration portal
+  registrationUrl: "https://startup-brawl.vercel.app/", // Startup Brawl portal
   logo: "/logo.png"
 };
 
