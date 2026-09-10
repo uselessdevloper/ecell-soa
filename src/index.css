@@ -118,7 +118,12 @@ html {
   font-size: 16px;
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  overflow-x: hidden;
+  overflow: hidden !important;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
   text-size-adjust: 100%;
 }
 
@@ -129,19 +134,23 @@ body {
   line-height: 1.6;
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  min-height: 100vh;
-  min-height: 100dvh;
-  overflow-x: hidden;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
-  min-height: 100vh;
-  min-height: 100dvh;
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
   position: relative;
-  overflow: hidden;
+  overflow: hidden !important;
+  scrollbar-width: none !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -177,16 +186,21 @@ button {
   color: var(--text-primary);
 }
 
-/* Custom Scrollbar */
+/* Scrollbars Completely Disabled to Prevent Purple Track Bars */
+* {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
 ::-webkit-scrollbar {
-  width: 6px;
+  display: none !important;
+  width: 0px !important;
+  height: 0px !important;
+  background: transparent !important;
 }
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-}
+
 ::-webkit-scrollbar-thumb {
-  background: var(--accent-primary);
-  border-radius: 9999px;
+  display: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

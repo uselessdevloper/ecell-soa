@@ -100,16 +100,18 @@ const Domino = ({
           <div className={styles.innerBevel}>
             {displayNum && <span className={styles.dominoNumber}>{displayNum}</span>}
             
-            <div className={styles.dominoCenter}>
-              {logo && !fullFaceLogo && (
-                <div className={styles.dominoLogoContainer}>
-                  <img src={logo} alt={title || "Domino Logo"} className={styles.dominoLogoImg} />
-                </div>
-              )}
-              {title && <h2 className={styles.title}>{title}</h2>}
-              {tagline && <p className={styles.tagline}>{tagline}</p>}
-              {children}
-            </div>
+            {(title || tagline || children || (logo && !fullFaceLogo)) && (
+              <div className={styles.dominoCenter}>
+                {logo && !fullFaceLogo && (
+                  <div className={styles.dominoLogoContainer}>
+                    <img src={logo} alt={title || "Domino Logo"} className={styles.dominoLogoImg} />
+                  </div>
+                )}
+                {title && <h2 className={styles.title}>{title}</h2>}
+                {tagline && <p className={styles.tagline}>{tagline}</p>}
+                {children}
+              </div>
+            )}
 
             <div className={styles.dominoPivotIndicator}>
               <span className={styles.dotIndicator}></span>

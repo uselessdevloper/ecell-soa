@@ -1,270 +1,389 @@
 .section {
   width: 100%;
+  height: 100vh;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: clamp(20px, 4vh, 40px) 0;
-  text-align: center;
+  justify-content: space-between;
+  padding: clamp(28px, 4vh, 44px) clamp(16px, 2.5vw, 32px) clamp(20px, 3vh, 32px);
   position: relative;
+  overflow: hidden;
+  user-select: none;
+  box-sizing: border-box;
+  gap: 0;
 }
 
+/* Header */
 .header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  margin-bottom: 20px;
-}
-
-.categoryPill {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  color: var(--accent-secondary);
-  font-weight: 700;
+  margin-bottom: clamp(4px, 0.8vh, 10px);
+  position: relative;
+  z-index: 5;
 }
 
 .mainTitle {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-  font-weight: 800;
+  font-family: var(--font-display, 'Outfit', 'Inter', sans-serif);
+  font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+  font-weight: 900;
   color: #ffffff;
+  letter-spacing: 0.04em;
+  margin: 0;
+  line-height: 1.1;
+  text-transform: uppercase;
+  text-shadow: 0 0 24px rgba(255, 120, 40, 0.4), 0 4px 12px rgba(0, 0, 0, 0.9);
 }
 
-.subtitle {
-  font-family: var(--font-display);
-  font-size: clamp(1rem, 1.4vw, 1.3rem);
-  color: var(--accent-warm);
-  letter-spacing: 0.08em;
-}
-
-.tagline {
-  font-family: var(--font-body);
-  font-size: clamp(0.9rem, 1.05vw, 1rem);
-  color: var(--text-secondary);
-  font-style: italic;
-}
-
-.branchingContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  width: 100%;
-  max-width: 960px;
-}
-
-.centerNode {
-  cursor: pointer;
-  margin-bottom: 4px;
-  transition: transform 0.3s ease;
-}
-
-.centerNode:hover {
-  transform: scale(1.08);
-}
-
-.hubCircle {
-  width: 86px;
-  height: 86px;
-  border-radius: 50%;
+/* 3D Card Display Stage */
+.cardDisplayStage {
   position: relative;
-  overflow: hidden;
-  border: 2px solid var(--accent-primary);
+  width: 100%;
+  max-width: 1240px;
+  flex: 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 24px rgba(155, 48, 255, 0.5), inset 0 0 12px rgba(0, 0, 0, 0.6);
+  perspective: 1400px;
+  transform-style: preserve-3d;
+  user-select: none;
+  cursor: grab;
+  margin: clamp(8px, 1.5vh, 18px) 0;
+  min-height: clamp(380px, 50vh, 480px);
+  flex-shrink: 0;
 }
 
-.hubBgImg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: grayscale(80%) brightness(0.7);
-  transition: filter 0.3s ease, transform 0.3s ease;
+.cardDisplayStage.dragging {
+  cursor: grabbing;
 }
 
-.centerNode:hover .hubBgImg {
-  filter: grayscale(0%) brightness(0.9);
-  transform: scale(1.1);
-}
-
-.hubOverlay {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle, rgba(56, 29, 89, 0.5) 0%, rgba(22, 12, 38, 0.8) 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.hubTitle {
-  position: relative;
-  z-index: 2;
-  font-family: var(--font-display);
-  font-size: 0.85rem;
-  font-weight: 800;
-  color: #ffffff;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-.hubSub {
-  position: relative;
-  z-index: 2;
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  color: var(--accent-warm);
-  letter-spacing: 0.1em;
-}
-
-.teamsGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(12px, 1.8vw, 20px);
-  width: 100%;
-}
-
-.teamCard {
-  background: rgba(22, 12, 36, 0.7);
-  border: 1px solid rgba(155, 48, 255, 0.25);
-  backdrop-filter: blur(8px);
-  padding: 16px 14px;
-  border-radius: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  text-align: left;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.teamCard:hover {
-  border-color: var(--accent-secondary);
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(155, 48, 255, 0.25);
-}
-
-.teamCard.selected {
-  border-color: var(--accent-secondary);
-  background: rgba(36, 18, 60, 0.85);
-  box-shadow: 0 0 20px rgba(180, 77, 255, 0.35);
-}
-
-.teamHeader {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.teamIndex {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--accent-secondary);
-  font-weight: 700;
-}
-
-.teamName {
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: 0.02em;
-}
-
-.teamHeadline {
-  font-family: var(--font-body);
-  font-size: 0.82rem;
-  color: var(--accent-warm);
-  font-style: italic;
-}
-
-.benefitsList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: auto;
-}
-
-.benefitBadge {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  padding: 3px 8px;
-  border-radius: 4px;
-  background: rgba(155, 48, 255, 0.15);
-  border: 1px solid rgba(155, 48, 255, 0.3);
-  color: var(--accent-tertiary);
-}
-
-.convergeCta {
-  margin-top: 10px;
-}
-
-/* YOU Section */
-.youArea {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  position: relative;
-}
-
-.youGlow {
+/* Circular Navigation Arrow Buttons */
+.navArrow {
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 340px;
-  height: 340px;
-  background: radial-gradient(circle, rgba(155, 48, 255, 0.35) 0%, transparent 70%);
-  filter: blur(25px);
-  pointer-events: none;
-}
-
-.youSub {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-  color: var(--accent-warm);
-  font-weight: 700;
-}
-
-.youTitle {
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 4vw, 3.5rem);
-  font-weight: 800;
+  transform: translateY(-50%);
+  width: clamp(44px, 3.6vw, 52px);
+  height: clamp(44px, 3.6vw, 52px);
+  border-radius: 50%;
+  background: rgba(14, 14, 20, 0.85);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(12px);
   color: #ffffff;
-}
-
-.youTagline {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  color: var(--text-secondary);
-}
-
-.youDominoWrapper {
   display: flex;
+  align-items: center;
   justify-content: center;
+  z-index: 40;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.navArrow:hover {
+  transform: translateY(-50%) scale(1.12);
+  background: rgba(122, 24, 24, 0.85);
+  border-color: #ff9800;
+  box-shadow: 0 0 25px rgba(255, 152, 0, 0.5);
+}
+
+.navArrow:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.navArrowLeft {
+  left: clamp(8px, 2vw, 28px);
+}
+
+.navArrowRight {
+  right: clamp(8px, 2vw, 28px);
+}
+
+/* Carousel Track */
+.cardsTrack {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+
+/* Single Stacked Playing Card Container */
+.cardStackWrapper {
+  position: absolute;
+  width: clamp(280px, 25vw, 350px);
+  height: clamp(380px, 52vh, 470px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.2, 0.85, 0.3, 1),
+              opacity 0.45s ease,
+              filter 0.45s ease;
   cursor: pointer;
 }
 
-.youHint {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-tertiary);
+/* Coverflow 3D Positions */
+.cardCenter {
+  transform: translateX(0) translateZ(60px) rotateY(0deg) scale(1);
+  z-index: 20;
+  opacity: 1;
+  filter: blur(0px);
 }
 
-@media (max-width: 860px) {
-  .teamsGrid {
-    grid-template-columns: repeat(2, 1fr);
+.cardLeft {
+  transform: translateX(-66%) translateZ(-80px) rotateY(24deg) scale(0.85);
+  z-index: 10;
+  opacity: 0.65;
+  filter: blur(1.5px);
+}
+
+.cardRight {
+  transform: translateX(66%) translateZ(-80px) rotateY(-24deg) scale(0.85);
+  z-index: 10;
+  opacity: 0.65;
+  filter: blur(1.5px);
+}
+
+.cardFarLeft {
+  transform: translateX(-120%) translateZ(-180px) rotateY(38deg) scale(0.7);
+  z-index: 5;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cardFarRight {
+  transform: translateX(120%) translateZ(-180px) rotateY(-38deg) scale(0.7);
+  z-index: 5;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cardHidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.5);
+}
+
+/* 1. Tilted Back Card with Harlequin Diamonds */
+.tiltedCardBack {
+  position: absolute;
+  inset: 0;
+  transform: rotate(-7deg) translate(-10px, 8px);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+  z-index: 1;
+  transition: transform 0.35s ease;
+}
+
+.cardCenter:hover .tiltedCardBack {
+  transform: rotate(-9deg) translate(-14px, 12px);
+}
+
+.harlequinSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 2. Main Playing Card Front (Parchment Linen Face) */
+.playingCardFront {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #f7f2e5;
+  background-image: 
+    radial-gradient(ellipse at 50% 50%, #faf6ec 0%, #f4ede0 80%, #eee3d0 100%);
+  border-radius: 22px;
+  border: 1.5px solid rgba(130, 110, 80, 0.35);
+  box-shadow: 
+    0 22px 60px rgba(0, 0, 0, 0.8),
+    inset 0 0 20px rgba(180, 155, 120, 0.35),
+    inset 0 0 2px rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  padding: clamp(18px, 2.2vh, 26px) clamp(18px, 2vw, 24px);
+  box-sizing: border-box;
+  z-index: 2;
+  text-align: left;
+  transition: box-shadow 0.3s ease;
+}
+
+.cardCenter:hover .playingCardFront {
+  box-shadow: 
+    0 28px 70px rgba(0, 0, 0, 0.9),
+    0 0 35px rgba(255, 170, 80, 0.3),
+    inset 0 0 24px rgba(180, 155, 120, 0.4);
+}
+
+/* Corner Suit Symbols (Club ♣) */
+.cornerSuitTop {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  line-height: 1;
+}
+
+.cornerSuitBottom {
+  position: absolute;
+  bottom: 12px;
+  right: 16px;
+  line-height: 1;
+  transform: rotate(180deg);
+}
+
+.clubSymbol {
+  font-size: clamp(1.3rem, 1.6vw, 1.7rem);
+  color: #7a1818;
+  text-shadow: 0 1px 2px rgba(122, 24, 24, 0.3);
+  font-weight: 900;
+  display: block;
+}
+
+/* Header Area Inside Card */
+.cardHeaderArea {
+  margin-top: clamp(10px, 1.6vh, 18px);
+  margin-bottom: clamp(4px, 0.8vh, 8px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Classical Bold Serif Title */
+.cardSerifTitle {
+  font-family: 'Playfair Display', 'Cinzel', 'Georgia', serif;
+  font-size: clamp(1.4rem, 2.1vw, 2.1rem);
+  font-weight: 900;
+  color: #7a1818;
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  margin: 0;
+  text-transform: uppercase;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
+}
+
+/* Subtitle */
+.cardSubtitle {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.68rem, 0.78vw, 0.82rem);
+  font-weight: 800;
+  color: #14223d;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 4px;
+  line-height: 1.3;
+}
+
+/* Center Woodcut Linework Chamber */
+.illustrationChamber {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: clamp(4px, 0.8vh, 10px) 0;
+  padding: 2px 0;
+}
+
+.illustrationChamber svg {
+  max-width: 100%;
+  max-height: clamp(75px, 11vh, 110px);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.12));
+}
+
+/* Bottom Metadata Details with ♣ Bullets */
+.metadataList {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(5px, 0.8vh, 8px);
+  margin-top: auto;
+  margin-bottom: clamp(10px, 1.5vh, 16px);
+  padding-left: 2px;
+}
+
+.metadataItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bulletClub {
+  font-size: clamp(0.9rem, 1.1vw, 1.15rem);
+  color: #7a1818;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.bulletText {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.72rem, 0.82vw, 0.86rem);
+  font-weight: 800;
+  color: #14223d;
+  letter-spacing: 0.03em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+/* Quick Team Selector Pills Bar */
+.teamSelectorRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  margin-top: clamp(8px, 1.5vh, 16px);
+  position: relative;
+  z-index: 10;
+  max-width: 900px;
+}
+
+.teamPillBtn {
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(0.72rem, 0.85vw, 0.84rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 7px 16px;
+  border-radius: 9999px;
+  background: rgba(14, 14, 20, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+.teamPillBtn:hover {
+  color: #ffffff;
+  border-color: #ff9800;
+  box-shadow: 0 0 14px rgba(255, 152, 0, 0.4);
+}
+
+.teamPillBtnActive {
+  background: linear-gradient(135deg, rgba(122, 24, 24, 0.9) 0%, rgba(168, 32, 32, 0.85) 100%);
+  border-color: #f7f2e5;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(122, 24, 24, 0.65);
+}
+
+/* Responsive Adaptations */
+@media (max-width: 768px) {
+  .section {
+    padding-top: clamp(48px, 7vh, 64px);
   }
-}
 
-@media (max-width: 520px) {
-  .teamsGrid {
-    grid-template-columns: 1fr;
+  .cardStackWrapper {
+    width: clamp(290px, 86vw, 360px);
+    height: clamp(460px, 60vh, 520px);
+  }
+
+  .cardLeft,
+  .cardRight {
+    display: none;
+  }
+
+  .navArrow {
+    width: 42px;
+    height: 42px;
   }
 }

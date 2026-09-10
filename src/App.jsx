@@ -2,9 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { DominoProvider, useDomino } from './context/DominoContext';
 import ParticleCanvas from './components/Effects/ParticleCanvas';
-import PoppingBubbles from './components/Effects/PoppingBubbles';
+import StageTransitionOverlay from './components/Effects/StageTransitionOverlay';
 import FrontPage from './components/Hero/FrontPage';
-import SoundToggle from './components/UI/SoundToggle';
 import LevelMap from './components/Navigation/LevelMap';
 import Robot from './components/Robot/Robot';
 import S2_WhoWeAre from './sections/S2_WhoWeAre';
@@ -43,82 +42,63 @@ const MainApp = () => {
   const { playClick } = useSoundManager();
   const sectionContainerRef = useRef(null);
   const prefersReducedMotion = useReducedMotion();
-  const wheelTimeoutRef = useRef(null);
-  const scrollSettleTimeoutRef = useRef(null);
+  const wheelLockRef = useRef(false);
   const touchStartRef = useRef({ x: 0, y: 0 });
 
   const isFrontPage = currentDomino === -1;
 
-  // Dynamic Directional 3D Camera Transition when active stage changes
+  // Silky-Smooth Stage Reveal when active stage updates
   useEffect(() => {
     if (!sectionContainerRef.current || prefersReducedMotion || isFrontPage) return;
 
-    const startY = direction === 'backward' ? -45 : 45;
-    const startRotateX = direction === 'backward' ? -7 : 7;
+    const startY = direction === 'backward' ? -28 : 28;
 
     gsap.fromTo(
       sectionContainerRef.current,
       { 
         opacity: 0, 
         y: startY, 
-        rotateX: startRotateX, 
-        scale: 0.94, 
-        filter: 'blur(8px)' 
+        scale: 0.97, 
+        filter: 'blur(6px)' 
       },
       { 
         opacity: 1, 
         y: 0, 
-        rotateX: 0, 
         scale: 1, 
         filter: 'blur(0px)', 
-        duration: 0.7, 
+        duration: 0.65, 
         ease: 'power3.out' 
       }
     );
   }, [currentDomino, direction, prefersReducedMotion, isFrontPage]);
 
-  // Creative Kinetic Scroll with 3D Tilt Physics and Momentum Navigation
+  // Ultra-Smooth Scroll Navigation with Momentum Lock
   useEffect(() => {
     const handleWheel = (e) => {
-      if (isTransitioning) return;
-      if (Math.abs(e.deltaY) < 10) return;
+      // Locked while 1-second overlay transition is active
+      if (isTransitioning || wheelLockRef.current) return;
 
-      // Real-time kinetic 3D tilt reaction on scroll
+      // Ignore micro trackpad tremors
+      if (Math.abs(e.deltaY) < 28) return;
+
+      wheelLockRef.current = true;
+      setTimeout(() => {
+        wheelLockRef.current = false;
+      }, 1050);
+
+      // Subtle smooth parallax hint
       if (sectionContainerRef.current && !prefersReducedMotion) {
-        const tiltAmount = Math.max(-18, Math.min(18, e.deltaY * 0.12));
-        const yShift = Math.max(-20, Math.min(20, -e.deltaY * 0.15));
-
+        const nudgeY = e.deltaY > 0 ? -12 : 12;
         gsap.to(sectionContainerRef.current, {
-          y: yShift,
-          rotateX: tiltAmount,
-          duration: 0.18,
-          overwrite: 'auto'
+          y: nudgeY,
+          duration: 0.2,
+          ease: 'power2.out'
         });
-
-        // Spring back if threshold not reached
-        if (scrollSettleTimeoutRef.current) clearTimeout(scrollSettleTimeoutRef.current);
-        scrollSettleTimeoutRef.current = setTimeout(() => {
-          if (sectionContainerRef.current) {
-            gsap.to(sectionContainerRef.current, {
-              y: 0,
-              rotateX: 0,
-              duration: 0.5,
-              ease: 'back.out(1.5)'
-            });
-          }
-        }, 150);
       }
-
-      if (Math.abs(e.deltaY) < 32) return;
-
-      if (wheelTimeoutRef.current) return;
-      wheelTimeoutRef.current = setTimeout(() => {
-        wheelTimeoutRef.current = null;
-      }, 700);
 
       if (e.deltaY > 0) {
         nextSection();
-      } else if (e.deltaY < 0) {
+      } else {
         prevSection();
       }
     };
@@ -126,7 +106,6 @@ const MainApp = () => {
     window.addEventListener('wheel', handleWheel, { passive: true });
     return () => {
       window.removeEventListener('wheel', handleWheel);
-      if (scrollSettleTimeoutRef.current) clearTimeout(scrollSettleTimeoutRef.current);
     };
   }, [isTransitioning, nextSection, prevSection, prefersReducedMotion]);
 
@@ -141,6 +120,7 @@ const MainApp = () => {
 
     const handleTouchEnd = (e) => {
       if (isTransitioning) return;
+      const isCarouselTarget = e.target && e.target.closest && e.target.closest('[data-swipe-ignore="true"]');
       const deltaX = e.changedTouches[0].clientX - touchStartRef.current.x;
       const deltaY = e.changedTouches[0].clientY - touchStartRef.current.y;
 
@@ -150,7 +130,7 @@ const MainApp = () => {
         } else {
           prevSection();
         }
-      } else if (Math.abs(deltaX) > 50) {
+      } else if (Math.abs(deltaX) > 50 && !isCarouselTarget) {
         if (deltaX < 0) {
           nextSection();
         } else {
@@ -199,6 +179,9 @@ const MainApp = () => {
         '--ambient-secondary': currentSectionData?.colorSecondary || '#00f0ff',
       }}
     >
+      {/* 1-Second E-Cell SOA Animated Logo Slide Transition Overlay */}
+      <StageTransitionOverlay />
+
       {/* 1. FRONT PAGE HERO VIEW (When currentDomino is -1) */}
       {isFrontPage ? (
         <FrontPage 
@@ -206,7 +189,7 @@ const MainApp = () => {
           onSelectStage={(idx) => goToSection(idx)}
         />
       ) : (
-        /* 2. THE 6 STAGES WITH SCATTERED POPPING BUBBLE SYSTEM */
+        /* 2. THE 6 STAGES PRESENTATION */
         <>
           {/* Dynamic Cyber Particle Background */}
           <ParticleCanvas 
@@ -232,20 +215,8 @@ const MainApp = () => {
             </svg>
           </button>
 
-          {/* Scattered Popping Bubbles Background & Stage Selector HUD */}
-          <PoppingBubbles 
-            activeStage={currentDomino} 
-            onBubblePop={(idx) => goToSection(idx)}
-            showBackgroundOrbs={true}
-          />
-
           {/* Floating Level Map HUD (Top-Right) */}
           <LevelMap />
-
-          {/* Floating Audio Controller (Top-Right) */}
-          <div className={styles.floatingSound}>
-            <SoundToggle />
-          </div>
 
           {/* Main Interactive Stage: Centered Domino Presentation */}
           <main className={styles.mainStage}>

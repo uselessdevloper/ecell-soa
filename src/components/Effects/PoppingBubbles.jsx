@@ -319,25 +319,6 @@ const PoppingBubbles = ({
       {/* Canvas Layer for High-Performance Membrane Shards & Droplet Mist */}
       <canvas ref={canvasRef} className={styles.burstCanvas} aria-hidden="true" />
 
-      {/* Top HUD Stage Orbs Bar */}
-      <div className={styles.floatingHudBar} role="navigation" aria-label="Quick Level Jumper">
-        {BUBBLE_CONFIGS.map((cfg) => (
-          <button
-            key={cfg.id}
-            type="button"
-            className={`${styles.hudOrbBtn} ${activeStage === cfg.id ? styles.hudOrbActive : ''}`}
-            style={{
-              '--orb-color': cfg.color,
-              '--orb-glow': cfg.glow
-            }}
-            onClick={() => handlePop(cfg.id)}
-            title={`Stage ${cfg.label}: ${cfg.name}`}
-            aria-label={`Jump to Stage ${cfg.label}: ${cfg.name}`}
-          >
-            {cfg.label}
-          </button>
-        ))}
-      </div>
 
       {/* Floating 3D Iridescent Background Bubbles */}
       {showBackgroundOrbs && (

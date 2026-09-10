@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useCallback, useEffect } from 'react';
+import React, { createContext, useState, useContext, useCallback, useEffect, useRef } from 'react';
 import { DOMINO_SECTIONS } from '../data/content';
 
 const DominoContext = createContext();
@@ -36,57 +36,69 @@ export const DominoProvider = ({ children }) => {
     }
   }, [currentDomino]);
 
+  const [targetDomino, setTargetDomino] = useState(null);
+  const transitionTimerRef = useRef(null);
+  const finishTimerRef = useRef(null);
+
+  // Clean up timers on unmount
+  useEffect(() => {
+    return () => {
+      if (transitionTimerRef.current) clearTimeout(transitionTimerRef.current);
+      if (finishTimerRef.current) clearTimeout(finishTimerRef.current);
+    };
+  }, []);
+
   /**
-   * Directly navigate to a specific section (-1 for Front Page, 0-5 for stages).
+   * Directly navigate to a specific section (-1 for Front Page, 0-5 for stages)
+   * with the 1-second E-Cell SOA animated logo overlay.
    */
   const goToSection = useCallback((index) => {
-    if (isTransitioning || index < -1 || index > 5) return;
-    setDirection(index >= currentDomino ? 'forward' : 'backward');
-    setDominoStates(Array(6).fill('standing'));
-    setCurrentDomino(index);
-    setIsTransitioning(false);
-  }, [currentDomino, isTransitioning]);
-
-  /**
-   * Domino topple trigger: physical fall, robot reaction, impact spark, then move to next.
-   */
-  const triggerDomino = useCallback((index) => {
-    if (isTransitioning) return;
-
-    if (index === -1) {
-      goToSection(0);
-      return;
-    }
+    if (isTransitioning || index < -1 || index > 5 || index === currentDomino) return;
 
     setIsTransitioning(true);
-    setDirection('forward');
+    setTargetDomino(index);
+    setDirection(index >= currentDomino ? 'forward' : 'backward');
+    setRobotState('excited');
 
-    // 1. Domino initiates kinetic click pulse
+    // Domino kinetic reaction
     setDominoStates((prev) => {
       const copy = [...prev];
-      if (index >= 0 && index < 6) {
-        copy[index] = 'falling';
+      if (currentDomino >= 0 && currentDomino < 6) {
+        copy[currentDomino] = 'falling';
       }
       return copy;
     });
 
-    // 2. Robot companion reacts
-    setRobotState('excited');
-
-    // 3. Supersonic neon shockwaves & kinetic sparks
+    // Particle burst spark
     setTimeout(() => {
       setBurstTrigger(Date.now());
-    }, 120);
+    }, 100);
 
-    // 4. Smooth milestone transition to next section (~450ms)
-    setTimeout(() => {
+    // Midway through the 1-second overlay (~480ms): mount the new section behind the opaque overlay
+    if (transitionTimerRef.current) clearTimeout(transitionTimerRef.current);
+    transitionTimerRef.current = setTimeout(() => {
       setDominoStates(Array(6).fill('standing'));
+      setCurrentDomino(index);
+    }, 480);
 
-      if (index < 5) {
-        setCurrentDomino(index + 1);
-      }
+    // At 1000ms: Overlay finishes its 1-second lifecycle and dissolves smoothly
+    if (finishTimerRef.current) clearTimeout(finishTimerRef.current);
+    finishTimerRef.current = setTimeout(() => {
       setIsTransitioning(false);
-    }, 450);
+      setTargetDomino(null);
+    }, 1000);
+  }, [currentDomino, isTransitioning]);
+
+  /**
+   * Domino topple trigger: falls forward into the next stage
+   */
+  const triggerDomino = useCallback((index) => {
+    if (isTransitioning) return;
+    if (index === -1) {
+      goToSection(0);
+    } else if (index < 5) {
+      goToSection(index + 1);
+    }
   }, [isTransitioning, goToSection]);
 
   const nextSection = useCallback(() => {
@@ -94,21 +106,14 @@ export const DominoProvider = ({ children }) => {
     if (currentDomino === -1) {
       goToSection(0);
     } else if (currentDomino < 5) {
-      triggerDomino(currentDomino);
+      goToSection(currentDomino + 1);
     }
-  }, [currentDomino, isTransitioning, triggerDomino, goToSection]);
+  }, [currentDomino, isTransitioning, goToSection]);
 
   const prevSection = useCallback(() => {
     if (isTransitioning) return;
-    if (currentDomino > 0) {
-      setDominoStates((prev) => {
-        const copy = [...prev];
-        copy[currentDomino - 1] = 'standing';
-        return copy;
-      });
+    if (currentDomino > -1) {
       goToSection(currentDomino - 1);
-    } else if (currentDomino === 0) {
-      goToSection(-1);
     }
   }, [currentDomino, isTransitioning, goToSection]);
 
@@ -118,6 +123,7 @@ export const DominoProvider = ({ children }) => {
 
   const value = {
     currentDomino,
+    targetDomino,
     dominoStates,
     direction,
     soundEnabled,

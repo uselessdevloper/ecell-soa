@@ -1,101 +1,285 @@
-.container {
+.section {
   width: 100%;
+  height: 100vh;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  padding: clamp(20px, 4vh, 40px) 0;
-  text-align: center;
-  gap: 24px;
+  padding: clamp(52px, 7vh, 70px) clamp(20px, 4vw, 64px) clamp(16px, 2.5vh, 26px);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  color: #ffffff;
+  user-select: none;
 }
 
-.header {
+/* ==========================================================================
+   Background Camera Shutter Photo Reel
+   ========================================================================== */
+.shutterCameraStage {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.shutterSlide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 5.5s ease-out;
+  transform: scale(1.02);
+  filter: brightness(0.68) saturate(1.18);
+}
+
+.slideActive {
+  opacity: 0.32;
+  transform: scale(1.07);
+  z-index: 1;
+}
+
+.cameraVignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(ellipse 85% 75% at 50% 50%, rgba(7, 3, 18, 0.45) 0%, rgba(7, 3, 18, 0.86) 75%, #070312 100%);
+}
+
+.shutterFlash {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: rgba(255, 255, 255, 0.38);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease-out;
+}
+
+.shutterFlashActive {
+  opacity: 1;
+}
+
+/* Cinematic Viewfinder HUD */
+.viewfinderHud {
+  position: absolute;
+  inset: clamp(14px, 2.5vw, 32px);
+  z-index: 2;
+  pointer-events: none;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.38);
+  letter-spacing: 0.12em;
+}
+
+.hudTopLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 6px;
 }
 
-.sectionTag {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  color: var(--accent-secondary);
-  font-weight: 700;
+.recDot {
+  color: #ff3344;
+  font-size: 0.9rem;
+  animation: recPulse 1.2s ease-in-out infinite alternate;
 }
 
-.title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 3.8vw, 3rem);
-  font-weight: 800;
-  color: #ffffff;
+@keyframes recPulse {
+  from { opacity: 0.3; }
+  to { opacity: 1; text-shadow: 0 0 10px #ff3344; }
 }
 
-.tagline {
-  font-family: var(--font-body);
-  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
-  color: var(--text-secondary);
-  max-width: 600px;
-}
-
-.chainContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(12px, 2.5vw, 24px);
-  cursor: pointer;
-  padding: 10px 0;
-  width: 100%;
-  max-width: 900px;
-}
-
-.dominoWrapper {
-  display: flex;
-  justify-content: center;
-}
-
-.connector {
-  position: relative;
-  width: clamp(24px, 4vw, 50px);
-  height: 3px;
-  background: rgba(155, 48, 255, 0.3);
-  border-radius: 2px;
-  overflow: hidden;
-  align-self: center;
-}
-
-.energyPulse {
+.hudTopRight {
   position: absolute;
   top: 0;
-  left: -100%;
+  right: 0;
+  display: flex;
+  gap: 12px;
+}
+
+.hudCenterCross {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.6;
+}
+
+.hudBottomLeft {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.hudBottomRight {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+/* ==========================================================================
+   Foreground Stacked Typography (Matching Reference Layout)
+   ========================================================================== */
+.pillarsTypographyStack {
+  position: relative;
+  z-index: 4;
   width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, var(--accent-secondary), transparent);
-  animation: energyFlow 1.8s infinite linear;
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex: 1;
+  margin: auto 0;
+  padding: 0 clamp(8px, 1.5vw, 24px);
 }
 
-@keyframes energyFlow {
-  0% { left: -100%; }
-  100% { left: 100%; }
+.typographicRow {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  cursor: pointer;
+  padding: clamp(6px, 1.2vh, 12px) 0;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
 }
 
+.rowHeadlineArea {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.wordAndIndex {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.rowNumber {
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(1.1rem, 1.6vw, 1.6rem);
+  font-weight: 800;
+  color: #ffca28;
+  text-shadow: 0 0 10px rgba(255, 202, 40, 0.45);
+}
+
+/* Big and Bold Display Typography (Visible from background image) */
+.rowWord {
+  font-family: var(--font-display, 'Outfit', 'Inter', sans-serif);
+  font-size: clamp(2.8rem, 5.5vw, 5.2rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 0.95;
+  margin: 0;
+  color: #ffffff;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.95), 0 0 30px rgba(0, 0, 0, 0.85);
+  transition: all 0.25s ease;
+}
+
+.rowTagline {
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(0.7rem, 0.86vw, 0.84rem);
+  font-weight: 700;
+  color: #ffb800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(255, 184, 0, 0.5);
+}
+
+.rowDesc {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.82rem, 0.95vw, 0.94rem);
+  color: rgba(255, 245, 235, 0.84);
+  line-height: 1.4;
+  margin: 6px 0 0;
+  max-width: 820px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+/* Clean Horizontal Divider Line from Reference Image */
+.rowDivider {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  margin-top: clamp(8px, 1.4vh, 14px);
+  transition: all 0.3s ease;
+}
+
+/* Active Hover State — entire row shifts + title turns vivid yellow */
+.rowHovered {
+  transform: translateX(6px);
+}
+
+.rowHovered .rowWord {
+  color: #ffeb3b;
+  text-shadow: 0 0 20px rgba(255, 235, 59, 0.6);
+}
+
+.rowHovered .rowTagline {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.rowHovered .rowDivider {
+  background: linear-gradient(90deg, #ffcc00 0%, #ffb800 60%, transparent 100%);
+  box-shadow: 0 0 14px rgba(255, 200, 0, 0.7);
+  height: 2.5px;
+}
+
+/* Bottom Action Row */
+.footerActionRow {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.exploreNextBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 24px;
+  border-radius: 9999px;
+  background: rgba(10, 6, 20, 0.65);
+  border: 1px solid rgba(255, 184, 0, 0.4);
+  color: #ffb800;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+}
+
+.exploreNextBtn:hover {
+  background: rgba(255, 184, 0, 0.15);
+  border-color: #ffb800;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(255, 184, 0, 0.45);
+  transform: translateY(-2px);
+}
+
+/* Responsive Adaptations */
 @media (max-width: 768px) {
-  .chainContainer {
+  .rowHeadlineArea {
     flex-direction: column;
-    gap: 20px;
+    gap: 4px;
   }
 
-  .connector {
-    width: 3px;
-    height: 30px;
+  .rowTagline {
+    font-size: 0.7rem;
   }
-
-  .energyPulse {
-    animation-name: energyFlowVertical;
-  }
-}
-
-@keyframes energyFlowVertical {
-  0% { top: -100%; }
-  100% { top: 100%; }
 }

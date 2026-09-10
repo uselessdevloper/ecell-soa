@@ -18,7 +18,7 @@ export const DOMINO_SECTIONS = [
     subtagline: "Think beyond the classroom.",
     keywords: ["THINK", "CREATE", "BUILD"],
     robotDialogues: [
-      "Welcome to IEC-SOA! We are a student-powered launchpad for builders, thinkers, and creators who dare to think beyond the classroom. We connect you with top mentors and resources so your ideas become real ventures."
+      "IEC-SOA is built by students, for students who want to think beyond the classroom. We bring together innovators, mentors, and creators so your ideas never stay just ideas."
     ],
     robotState: "pointing",
     theme: "identity",
@@ -74,28 +74,28 @@ export const DOMINO_SECTIONS = [
     tagline: "Learn. Compete. Connect. Create.",
     events: [
       {
-        id: "esummit",
-        name: "E-SUMMIT",
-        tagline: "Flagship Innovation Conclave",
-        description: "Eastern India's grandest annual entrepreneurship summit uniting student visionaries, venture capital funds, top angel investors, and industry icons for intense 36-hour buildathons, startup expos, and live funding pitches.",
-        tags: ["STARTUP EXPO", "BUILDATHON", "VC PITCHING", "GLOBAL PANELS", "FIRESIDE CHATS"],
-        robotDialogue: "E-Summit is our flagship annual innovation festival! It unites top venture capitalists, angel investors, founders, and students for intense buildathons, startup expos, live funding pitches, and leadership panels."
+        id: "resonance25",
+        name: "Resonance-25",
+        tagline: "Powered by IEC-SOA",
+        description: "Eastern India's grandest inter-college celebration uniting student visionaries, high-energy musical showcases, startup expos, and live funding pitches.",
+        tags: ["FLAGSHIP FEST", "STARTUP EXPO", "LIVE PITCHING", "GLOBAL PANELS", "STUDENT SUMMIT"],
+        robotDialogue: "Resonance-25 is our flagship mega celebration! It brings together thousands of students, music, live startup pitches, and industry leaders under one electric roof."
       },
       {
-        id: "exnova",
-        name: "EXNOVA",
+        id: "oblive",
+        name: "Oblive",
+        tagline: "Soaked in Memories, Sealed in Time",
+        description: "Signature annual conclave and founder social bringing together alumni leaders, innovators, and creators to celebrate groundbreaking milestones.",
+        tags: ["ANNUAL GALA", "FOUNDER SOCIAL", "NETWORKING", "CREATIVE LEADERS", "CELEBRATION"],
+        robotDialogue: "Oblive is our signature annual gathering! Soaked in memories and sealed in time, it brings together founders, alumni leaders, and creators to celebrate entrepreneurial wins."
+      },
+      {
+        id: "exanova",
+        name: "Exanova",
         tagline: "Where Creativity Meets Corporate Strategy",
-        description: "IEC-SOA's premier creative business & management challenge. Teams dive into real-world corporate case studies, conduct live market research, engineer brand identities, and pitch disruptive product strategies directly to industry juries.",
-        tags: ["CASE STUDY CHALLENGE", "MARKET RESEARCH", "DESIGN THINKING", "BRAND BLUEPRINT", "PITCH BATTLE"],
-        robotDialogue: "EXNOVA is our premier creative business challenge! Teams dive into real-world corporate case studies, analyze market dynamics, formulate breakthrough brand strategies, and pitch bold solutions directly to industry judges."
-      },
-      {
-        id: "foundation",
-        name: "FOUNDATION SERIES",
-        tagline: "0-to-1 Startup Masterclasses",
-        description: "Comprehensive entrepreneurial bootcamps and masterclasses taking you from zero to one. Master idea validation, customer discovery, minimum viable product (MVP) development, financial modeling, marketing psychology, and investor pitch deck crafting.",
-        tags: ["IDEA VALIDATION", "MVP BUILDING", "FINANCIAL MODELING", "PITCH DECKS", "FOUNDER MENTORSHIP"],
-        robotDialogue: "The Foundation Series is our ground-up startup masterclass! We bring in successful founders, mentors, and alumni to teach you idea validation, minimum viable products, branding, financial modeling, and winning investor pitch decks."
+        description: "IEC-SOA's premier creative business & management challenge. Teams dive into real-world corporate case studies, marketing wizardry, and design thinking pitch battles.",
+        tags: ["CASE STUDY CHALLENGE", "MARKETING WIZARDS", "DESIGN THINKING", "BRAND BLUEPRINT", "PITCH BATTLE"],
+        robotDialogue: "Exanova is our premier creative business challenge! Teams tackle real-world corporate case studies, showcase marketing wizardry, and pitch bold solutions directly to industry judges."
       }
     ],
     robotDialogues: [
@@ -115,45 +115,69 @@ export const DOMINO_SECTIONS = [
     index: 3,
     number: "04",
     id: "teams",
-    title: "FIND YOUR PLACE.",
-    subtitle: "ONE E-CELL. SIX PATHS.",
-    tagline: "Choose where you want to make your mark.",
+    title: "Find Your Place.",
+    subtitle: "Six Wings. Infinite Possibilities.",
+    tagline: "Swipe through our teams to discover where you can make your mark.",
     teams: [
       {
         id: "technical",
         name: "TECHNICAL",
-        headline: "Build your skills.",
-        benefits: ["Real Projects", "Problem Solving", "Technical Growth", "Portfolio"]
+        aliasTitle: "The Builders",
+        subTag: "WING 01 // SYSTEM ARCHITECTURE & CODE",
+        headline: "We engineer the digital nervous system of the startup ecosystem.",
+        description: "Where abstract algorithms translate into real human impact. From architecting high-concurrency hackathon portals and university-wide digital engines to deploying live production software, you build the resilient foundation that powers tomorrow's founders.",
+        impact: "Production Deployments · Scalable Architectures · Real Products",
+        image: "/pr.png"
       },
       {
         id: "media",
         name: "MEDIA",
-        headline: "Make moments matter.",
-        benefits: ["Creative Skills", "Photography", "Videography", "Portfolio", "Exposure"]
+        aliasTitle: "The Storytellers",
+        subTag: "WING 02 // CINEMATOGRAPHY & VISUAL ARTS",
+        headline: "Immortalizing the turning points where raw ambition becomes history.",
+        description: "You command the lens that captures lightning in motion. Through high-contrast cinema, editorial photography, and documentary perspectives, your craft forges the visual identity and cultural mythology of Eastern India’s premier innovation movement.",
+        impact: "1,000,000+ Digital Reach · 4K Cinema Production · Cultural Legacy",
+        image: "/DSC07299.JPG"
       },
       {
         id: "event",
         name: "EVENT MANAGEMENT",
-        headline: "Create experiences.",
-        benefits: ["Leadership", "Planning", "Teamwork", "Execution", "Networking"]
+        aliasTitle: "The Orchestrators",
+        subTag: "WING 03 // OPERATIONS & HIGH-STAKES PRODUCTION",
+        headline: "Where meticulous precision commands raw chaos into unforgettable spectacle.",
+        description: "You command the ground where vision takes physical form. Directing Eastern India's largest flagship conclaves, 36-hour buildathons, and angel investor pitch arenas with unmatched execution standards and calm mastery under pressure.",
+        impact: "5,000+ Student Delegates · Live Conclave Arenas · Flawless Execution",
+        image: "/events-crowd.jpg"
       },
       {
         id: "pr",
         name: "PUBLIC RELATIONS",
-        headline: "Build connections.",
-        benefits: ["Networking", "Communication", "Confidence", "Industry Exposure"]
+        aliasTitle: "The Connectors",
+        subTag: "WING 04 // STRATEGIC ALLIANCES & CAPITAL",
+        headline: "Bridging student dorm rooms with boardroom capital and industry titans.",
+        description: "You are the diplomats, negotiators, and catalysts. Forging strategic partnerships with venture capital funds, corporate sponsors, and national founders to build the high-speed pipeline that turns student visionaries into funded market leaders.",
+        impact: "Venture Capital Bridges · 100+ Enterprise Alliances · National Network",
+        image: "/event-talk.jpg"
       },
       {
         id: "content",
         name: "CONTENT",
-        headline: "Give ideas a voice.",
-        benefits: ["Writing", "Storytelling", "Research", "Communication"]
+        aliasTitle: "The Voices",
+        subTag: "WING 05 // EDITORIAL NARRATIVE & MANIFESTOS",
+        headline: "Words engineered to spark revolutions in how generations think.",
+        description: "You define the intellectual pulse of the ecosystem. Crafting provocative manifestos, deep-dive founder research, and narrative campaigns that cut through the noise and transform passive observers into relentless builders.",
+        impact: "Thought Leadership · Viral Manifestos · The Voice of Student Founders",
+        image: "/IMG_7878.jpg"
       },
       {
         id: "design",
         name: "DESIGN",
-        headline: "Make ideas visible.",
-        benefits: ["Design Skills", "Creative Thinking", "Portfolio", "Visual Communication"]
+        aliasTitle: "The Visionaries",
+        subTag: "WING 06 // BRAND IDENTITY & DIGITAL EXPERIENCE",
+        headline: "Making the invisible tangible, captivating, and impossible to ignore.",
+        description: "You command human attention through form, motion, and typography. Sculpting zero-to-one brand systems, frictionless UI/UX architectures, and aesthetic identities that give every fledgling venture an unmistakable aura of authority.",
+        impact: "Zero-to-One Brand Systems · Immersive UI/UX · Aesthetic Authority",
+        image: "/EDITED-9567.JPG"
       }
     ],
     robotDialogues: [
@@ -171,8 +195,8 @@ export const DOMINO_SECTIONS = [
     index: 4,
     number: "05",
     id: "founders",
-    title: "FROM IDEA TO IMPACT",
-    subtitle: "MEET THE BUILDERS",
+    title: "STARTUPS FROM IEC",
+    subtitle: "VENTURES & SPEAKERS",
     founders: [
       {
         id: "biraja",
@@ -223,6 +247,16 @@ export const DOMINO_SECTIONS = [
         highlight: "AI-driven infrastructure and SaaS solutions empowering the creator economy.",
         fullDescription: "InfluCraft is a Bhubaneswar-based creator-tech startup developing AI-driven infrastructure and SaaS solutions for the creator economy. Its platform helps brands, agencies, and creators streamline campaigns, collaborations, workflows, analytics, and payments. IEC played a role in promoting and showcasing InfluCraft, bringing greater awareness of the startup and its technology-driven approach among students and the university's entrepreneurial ecosystem.",
         dialogue: "InfluCraft is a creator-tech startup building AI-driven SaaS solutions for the creator economy! IEC helped promote and showcase InfluCraft, bringing greater awareness of its tech-driven platform across the student ecosystem."
+      },
+      {
+        id: "twentyfour",
+        name: "24X7",
+        role: "Pre-Incubated in IEC · Campus Logistics",
+        category: "PRE-INCUBATED STARTUP",
+        initials: "24",
+        highlight: "24/7 on-demand campus delivery and logistics pre-incubated at IEC-SOA.",
+        fullDescription: "24x7 is an active student venture pre-incubated within the Innovation & Entrepreneurship Cell (IEC) at SOA University. Built to provide round-the-clock convenience across campus hostels, 24x7 delivers late-night food, stationery, medicine, and student supplies with streamlined on-demand ordering.",
+        dialogue: "24x7 is pre-incubated in IEC-SOA, providing 24/7 round-the-clock on-campus logistics and delivery for students!"
       }
     ],
     journeySteps: ["IDEA", "ACTION", "IMPACT"],
@@ -241,14 +275,14 @@ export const DOMINO_SECTIONS = [
     index: 5,
     number: "06",
     id: "your-move",
-    title: "YOUR MOVE.",
-    subtitle: "One small decision can start something much bigger.",
+    title: "THANK YOU!",
+    subtitle: "Every great movement begins with a single spark. Your journey starts now.",
     cta: "JOIN E-CELL",
     philosophy: [
       "IDEA", "DIRECTION", "ACTION", "EXPERIENCE", "PEOPLE", "OPPORTUNITY", "IMPACT"
     ],
     robotDialogues: [
-      "Every major venture begins with a single domino. Your move starts now — click 'JOIN E-CELL' and take your first step with us!"
+      "Thank you for being part of this experience! Every major venture begins with a single domino. Your move starts now — click 'JOIN E-CELL' and take your first step with us!"
     ],
     robotState: "celebrating",
     theme: "climax",

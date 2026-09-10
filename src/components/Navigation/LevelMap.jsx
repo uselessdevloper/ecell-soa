@@ -47,7 +47,7 @@ const NODES = [
   { 
     id: 4, 
     level: 5, 
-    title: '05 FOUNDERS', 
+    title: '05 STARTUPS FROM IEC', 
     zone: 'Genesis Valley', 
     activeZoneName: 'Genesis Valley', 
     x: 74, 

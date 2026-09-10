@@ -1,144 +1,391 @@
 .section {
   width: 100%;
+  height: 100vh;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(52px, 7vh, 66px) clamp(20px, 3vw, 56px) clamp(10px, 1.6vh, 18px);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: transparent;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Upper 75% Zone: Header and 4-Point Timeline
+   ========================================================================== */
+.upperZone {
+  flex: 0 0 73%;
+  height: 73%;
+  max-height: 73%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1220px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* Header Area */
+.journeyHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2px;
+  margin-bottom: 2px;
+}
+
+.stageNumberPill {
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(0.66rem, 0.76vw, 0.76rem);
+  letter-spacing: 0.18em;
+  color: #ffca28;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(255, 202, 40, 0.5);
+}
+
+.journeyTitle {
+  font-family: var(--font-display, 'Outfit', sans-serif);
+  font-size: clamp(1.6rem, 2.4vw, 2.3rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  margin: 0;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.8);
+}
+
+.journeySubtitle {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.76rem, 0.86vw, 0.88rem);
+  color: rgba(255, 240, 230, 0.78);
+  margin: 2px 0 0;
+  letter-spacing: 0.02em;
+}
+
+/* Vertical Timeline Container (All 4 points fit in viewport) */
+.timelineContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  width: 100%;
+  margin-top: 6px;
+}
+
+/* Single Timeline Row */
+.timelineRow {
+  display: grid;
+  grid-template-columns: minmax(180px, 230px) 38px 1fr;
+  align-items: flex-start;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+/* Left Column: Phase & Subphase */
+.timeColumn {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  padding-right: clamp(14px, 2vw, 22px);
+  padding-top: 1px;
+}
+
+.timePhaseText {
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(0.78rem, 0.94vw, 0.96rem);
+  font-weight: 800;
+  color: #ffca28;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(255, 202, 40, 0.35);
+}
+
+.timeSubPhaseText {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.66rem, 0.75vw, 0.74rem);
+  color: rgba(255, 235, 220, 0.65);
+  margin-top: 2px;
+  line-height: 1.25;
+}
+
+/* Center Column: Node & Vertical Line */
+.nodeColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  height: 100%;
+}
+
+.glowingNodeMarker {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #0d0614;
+  border: 1.5px solid #ffca28;
+  box-shadow: 0 0 12px rgba(255, 202, 40, 0.75), inset 0 0 4px rgba(255, 202, 40, 0.4);
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(20px, 4vh, 40px) 0;
-  text-align: center;
-  position: relative;
+  z-index: 3;
+  margin-top: 2px;
+  flex-shrink: 0;
 }
 
-.ambientSpot {
+.nodeCoreDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffd54f;
+  box-shadow: 0 0 6px #ffd54f;
+}
+
+.verticalCordLine {
   position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(155, 48, 255, 0.25) 0%, rgba(10, 6, 16, 0.95) 70%);
-  filter: blur(40px);
-  pointer-events: none;
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  max-width: 800px;
-  width: 100%;
-  position: relative;
+  top: 20px;
+  bottom: -4px;
+  width: 2px;
+  background: linear-gradient(180deg, #ffca28 0%, rgba(255, 202, 40, 0.45) 75%, rgba(255, 202, 40, 0.15) 100%);
   z-index: 1;
 }
 
-.header {
+/* Right Column: Content */
+.contentColumn {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 6px;
+  text-align: left;
+  padding-left: clamp(14px, 2vw, 22px);
+  padding-top: 0;
 }
 
-.categoryPill {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-  color: var(--accent-warm);
+.serifHeadline {
+  font-family: 'Playfair Display', 'Cinzel', 'Georgia', serif;
+  font-size: clamp(0.98rem, 1.28vw, 1.28rem);
+  font-weight: 800;
+  color: #fff9f0;
+  letter-spacing: 0.02em;
+  line-height: 1.12;
+  margin: 0;
+  text-transform: uppercase;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+.subheadTag {
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(0.68rem, 0.78vw, 0.78rem);
   font-weight: 700;
+  color: #ffb300;
+  letter-spacing: 0.05em;
+  margin: 2px 0 3px;
 }
 
-.title {
-  font-family: var(--font-display);
-  font-size: clamp(2.8rem, 6vw, 5rem);
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  color: #ffffff;
-  line-height: 1;
-  text-shadow: 0 0 40px rgba(155, 48, 255, 0.5);
+.stepDescriptionText {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.72rem, 0.8vw, 0.84rem);
+  color: rgba(255, 245, 235, 0.82);
+  line-height: 1.36;
+  margin: 0;
+  max-width: 820px;
 }
 
-.tagline {
-  font-family: var(--font-body);
-  font-size: clamp(1rem, 1.3vw, 1.25rem);
-  color: var(--accent-secondary);
-  font-style: italic;
-  max-width: 600px;
-}
-
-.solitaryDomino {
+/* ==========================================================================
+   Lower 25% Zone: Big Thank You Finale
+   ========================================================================== */
+.lowerZone {
+  flex: 0 0 25%;
+  height: 25%;
+  max-height: 25%;
+  width: 100%;
+  max-width: 1220px;
+  margin: 0 auto;
   display: flex;
+  align-items: center;
   justify-content: center;
-  margin: 10px 0;
+  position: relative;
+  z-index: 2;
 }
 
-.ctaWrapper {
+.thankYouFinale {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  background: rgba(14, 10, 24, 0.72);
+  border: 1.5px solid rgba(255, 202, 40, 0.35);
+  border-radius: 18px;
+  padding: clamp(10px, 1.6vh, 18px) clamp(18px, 2.5vw, 36px);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.8), 0 0 28px rgba(255, 179, 0, 0.16);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-sizing: border-box;
+  gap: 20px;
+}
+
+.thankYouLeft {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  align-items: flex-start;
+  text-align: left;
+  justify-content: center;
+  gap: 2px;
 }
 
-.btnContentWithLogo {
+.lastStageBadge {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 6px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: #ffca28;
+  background: rgba(255, 202, 40, 0.1);
+  border: 1px solid rgba(255, 202, 40, 0.35);
+  padding: 2px 10px;
+  border-radius: 9999px;
+  margin-bottom: 2px;
+  text-shadow: 0 0 8px rgba(255, 202, 40, 0.4);
 }
 
-.btnLogoImg {
-  width: 26px;
-  height: 26px;
+.pulsingDot {
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+  background: #ffca28;
+  box-shadow: 0 0 8px #ffca28;
+  animation: pulseDot 1.8s infinite ease-in-out;
 }
 
-.ctaSubtext {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--text-tertiary);
-  max-width: 400px;
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.75); }
 }
 
-.philosophyChain {
+.thankYouDisplayTitle {
+  font-family: var(--font-display, 'Outfit', 'Inter', sans-serif);
+  font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  margin: 0;
+  line-height: 1;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #ffffff 0%, #ffe082 40%, #ffb300 80%, #ff8f00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 24px rgba(255, 179, 0, 0.55)) drop-shadow(0 3px 8px rgba(0, 0, 0, 0.9));
+}
+
+.thankYouQuote {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.74rem, 0.86vw, 0.88rem);
+  font-style: italic;
+  color: rgba(255, 245, 235, 0.86);
+  margin: 2px 0 0;
+  line-height: 1.3;
+}
+
+.thankYouRight {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.joinIecBtn {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin-top: 10px;
-  padding: 10px 16px;
-  background: rgba(22, 12, 36, 0.6);
-  border: 1px solid rgba(155, 48, 255, 0.2);
+  padding: 9px 26px;
   border-radius: 9999px;
+  background: linear-gradient(135deg, #ffb300 0%, #ff8f00 50%, #e65100 100%);
+  border: 1px solid #ffe082;
+  color: #140306;
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(0.82rem, 0.95vw, 0.94rem);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 6px 20px rgba(255, 143, 0, 0.4), 0 0 16px rgba(255, 202, 40, 0.25);
 }
 
-.stepWord {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: var(--text-secondary);
+.joinIecBtn:hover {
+  transform: translateY(-2px) scale(1.03);
+  background: linear-gradient(135deg, #ffc107 0%, #ffa000 50%, #f57c00 100%);
+  box-shadow: 0 8px 28px rgba(255, 143, 0, 0.65), 0 0 24px rgba(255, 202, 40, 0.5);
 }
 
-.stepWord:last-of-type {
-  color: var(--accent-warm);
-  font-weight: 700;
+.btnIecLogo {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
 }
 
-.stepArrow {
-  font-size: 0.72rem;
-  color: var(--accent-primary);
-  opacity: 0.6;
+.registrationHint {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.68rem;
+  color: rgba(255, 235, 220, 0.62);
+  letter-spacing: 0.02em;
 }
 
-@media (max-width: 768px) {
-  .title {
-    font-size: 2.8rem;
+.philosophyTrail {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 1px;
+}
+
+.trailWord {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: rgba(255, 245, 235, 0.72);
+  letter-spacing: 0.1em;
+}
+
+.trailArrow {
+  font-size: 0.66rem;
+  color: #ffca28;
+  opacity: 0.7;
+}
+
+/* Responsive Styles */
+@media (max-width: 820px) {
+  .section {
+    padding-top: clamp(48px, 6.5vh, 60px);
   }
 
-  .philosophyChain {
-    border-radius: 12px;
-    gap: 6px;
+  .timelineRow {
+    grid-template-columns: 140px 30px 1fr;
+  }
+
+  .thankYouFinale {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .thankYouLeft {
+    align-items: center;
+    text-align: center;
+  }
+
+  .thankYouRight {
+    align-items: center;
   }
 }
