@@ -84,6 +84,47 @@ const WOODCUT_ILLUSTRATIONS = {
     </svg>
   ),
 
+  social_media: (
+    <svg width="180" height="130" viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Antique Speech Bubble in Upper-Left */}
+      <path d="M 26 26 C 26 18 33 14 44 14 L 70 14 C 81 14 86 18 86 26 C 86 33 80 37 70 37 L 52 37 L 40 45 L 43 37 L 42 37 C 31 37 26 33 26 26 Z" stroke="#1c1917" strokeWidth="2" fill="#f5ede0" />
+      <circle cx="46" cy="25" r="2.2" fill="#1c1917" />
+      <circle cx="56" cy="25" r="2.2" fill="#1c1917" />
+      <circle cx="66" cy="25" r="2.2" fill="#1c1917" />
+
+      {/* Antique Megaphone / Acoustic Horn Body */}
+      <rect x="42" y="60" width="16" height="24" rx="3" stroke="#1c1917" strokeWidth="2.5" fill="#1c1917" />
+      <path d="M 58 64 L 112 36 L 116 36 L 116 108 L 112 108 L 58 80 Z" stroke="#1c1917" strokeWidth="2.8" fill="#f5ede0" />
+      <ellipse cx="116" cy="72" rx="9" ry="36" stroke="#1c1917" strokeWidth="2.5" fill="#f5ede0" />
+      <ellipse cx="117" cy="72" rx="4" ry="24" fill="#1c1917" />
+
+      {/* Woodcut Hatching Engravings on Horn */}
+      <line x1="74" y1="60" x2="74" y2="84" stroke="#1c1917" strokeWidth="1.6" strokeDasharray="3 3" />
+      <line x1="88" y1="52" x2="88" y2="92" stroke="#1c1917" strokeWidth="1.8" />
+      <line x1="102" y1="44" x2="102" y2="100" stroke="#1c1917" strokeWidth="1.6" strokeDasharray="4 2" />
+
+      {/* Antique Grip Handle */}
+      <path d="M 68 76 L 68 106 C 68 112 73 116 79 114 L 81 113 C 85 111 87 106 85 101 L 80 79 Z" stroke="#1c1917" strokeWidth="2.5" fill="#1c1917" />
+      <path d="M 71 85 Q 63 91 69 97" stroke="#f5ede0" strokeWidth="1.8" strokeLinecap="round" fill="none" />
+
+      {/* Concentric Broadcasting Soundwaves */}
+      <path d="M 134 48 A 28 28 0 0 1 134 96" stroke="#1c1917" strokeWidth="2.4" strokeLinecap="round" />
+      <path d="M 152 38 A 46 46 0 0 1 152 106" stroke="#1c1917" strokeWidth="2.2" strokeDasharray="5 3" strokeLinecap="round" />
+      <path d="M 170 28 A 62 62 0 0 1 170 116" stroke="#1c1917" strokeWidth="2" strokeLinecap="round" />
+
+      {/* Interconnected Viral Network Nodes & Signal Graph */}
+      <circle cx="152" cy="22" r="4.5" fill="#1c1917" />
+      <circle cx="180" cy="50" r="5" fill="#f5ede0" stroke="#1c1917" strokeWidth="2" />
+      <circle cx="176" cy="94" r="4.5" fill="#1c1917" />
+      <line x1="152" y1="22" x2="180" y2="50" stroke="#1c1917" strokeWidth="1.3" strokeDasharray="3 2" />
+      <line x1="180" y1="50" x2="176" y2="94" stroke="#1c1917" strokeWidth="1.3" strokeDasharray="3 2" />
+
+      {/* Engagement Sparks / Stars */}
+      <path d="M 132 24 L 133 27 L 136 28 L 133 29 L 132 32 L 131 29 L 128 28 L 131 27 Z" fill="#1c1917" />
+      <path d="M 148 116 L 149 119 L 152 120 L 149 121 L 148 124 L 147 121 L 144 120 L 147 119 Z" fill="#1c1917" />
+    </svg>
+  ),
+
   event: (
     <svg width="180" height="130" viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg">
       {/* Crossed Spotlights */}
@@ -195,6 +236,19 @@ const TEAMS_PLAYING_CARDS = [
     ],
     mission: 'Immortalizing the turning points where raw ambition becomes history.',
     robotDialogue: 'Media Wing captures live events, runs photography workshops, and publishes stories reaching millions!'
+  },
+  {
+    id: 'social_media',
+    cardTitle: 'SOCIAL MEDIA',
+    subtitle: 'VIRAL · ENGAGE · AMPLIFY',
+    illustrationKey: 'social_media',
+    bullets: [
+      'DIGITAL CAMPAIGNS & TREND JACKING',
+      'VIRAL REELS & COMMUNITY CULTURE',
+      'MULTI-CHANNEL AUDIENCE REACH'
+    ],
+    mission: 'Amplifying the ecosystem voice and commanding the cultural attention of digital generations.',
+    robotDialogue: 'Social Media Wing drives trend campaigns, viral reels, and scales our digital community across all platforms!'
   },
   {
     id: 'event',
@@ -414,7 +468,7 @@ const S5_Teams = ({ isActive, sectionIndex = 3 }) => {
       {/* Centered Stage Header with 3D Wireframe and Metallic Glow */}
       <StageHeader
         title="FIND YOUR PLACE."
-        subtitle="Six interconnected operational wings fueling the entrepreneurial movement."
+        subtitle="Seven interconnected operational wings fueling the entrepreneurial movement."
       />
 
       {/* Main 3D Card Display Stage */}

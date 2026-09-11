@@ -116,7 +116,7 @@ export const DOMINO_SECTIONS = [
     number: "04",
     id: "teams",
     title: "Find Your Place.",
-    subtitle: "Six Wings. Infinite Possibilities.",
+    subtitle: "Seven Wings. Infinite Possibilities.",
     tagline: "Swipe through our teams to discover where you can make your mark.",
     teams: [
       {
@@ -140,10 +140,20 @@ export const DOMINO_SECTIONS = [
         image: "/DSC07299.JPG"
       },
       {
+        id: "social_media",
+        name: "SOCIAL MEDIA",
+        aliasTitle: "The Amplifiers",
+        subTag: "WING 03 // VIRAL GROWTH & DIGITAL PRESENCE",
+        headline: "Amplifying the ecosystem's voice to millions across the digital frontier.",
+        description: "You ignite conversations that set the internet on fire. From high-impact digital campaigns and viral trendjacking to multi-platform community building, you ensure our founders and events command the global spotlight.",
+        impact: "Viral Reach · Cross-Platform Growth · Culture & Community",
+        image: "/events-crowd.jpg"
+      },
+      {
         id: "event",
         name: "EVENT MANAGEMENT",
         aliasTitle: "The Orchestrators",
-        subTag: "WING 03 // OPERATIONS & HIGH-STAKES PRODUCTION",
+        subTag: "WING 04 // OPERATIONS & HIGH-STAKES PRODUCTION",
         headline: "Where meticulous precision commands raw chaos into unforgettable spectacle.",
         description: "You command the ground where vision takes physical form. Directing Eastern India's largest flagship conclaves, 36-hour buildathons, and angel investor pitch arenas with unmatched execution standards and calm mastery under pressure.",
         impact: "5,000+ Student Delegates · Live Conclave Arenas · Flawless Execution",
@@ -153,7 +163,7 @@ export const DOMINO_SECTIONS = [
         id: "pr",
         name: "PUBLIC RELATIONS",
         aliasTitle: "The Connectors",
-        subTag: "WING 04 // STRATEGIC ALLIANCES & CAPITAL",
+        subTag: "WING 05 // STRATEGIC ALLIANCES & CAPITAL",
         headline: "Bridging student dorm rooms with boardroom capital and industry titans.",
         description: "You are the diplomats, negotiators, and catalysts. Forging strategic partnerships with venture capital funds, corporate sponsors, and national founders to build the high-speed pipeline that turns student visionaries into funded market leaders.",
         impact: "Venture Capital Bridges · 100+ Enterprise Alliances · National Network",
@@ -163,7 +173,7 @@ export const DOMINO_SECTIONS = [
         id: "content",
         name: "CONTENT",
         aliasTitle: "The Voices",
-        subTag: "WING 05 // EDITORIAL NARRATIVE & MANIFESTOS",
+        subTag: "WING 06 // EDITORIAL NARRATIVE & MANIFESTOS",
         headline: "Words engineered to spark revolutions in how generations think.",
         description: "You define the intellectual pulse of the ecosystem. Crafting provocative manifestos, deep-dive founder research, and narrative campaigns that cut through the noise and transform passive observers into relentless builders.",
         impact: "Thought Leadership · Viral Manifestos · The Voice of Student Founders",
@@ -173,7 +183,7 @@ export const DOMINO_SECTIONS = [
         id: "design",
         name: "DESIGN",
         aliasTitle: "The Visionaries",
-        subTag: "WING 06 // BRAND IDENTITY & DIGITAL EXPERIENCE",
+        subTag: "WING 07 // BRAND IDENTITY & DIGITAL EXPERIENCE",
         headline: "Making the invisible tangible, captivating, and impossible to ignore.",
         description: "You command human attention through form, motion, and typography. Sculpting zero-to-one brand systems, frictionless UI/UX architectures, and aesthetic identities that give every fledgling venture an unmistakable aura of authority.",
         impact: "Zero-to-One Brand Systems · Immersive UI/UX · Aesthetic Authority",
@@ -181,7 +191,7 @@ export const DOMINO_SECTIONS = [
       }
     ],
     robotDialogues: [
-      "Six specialized wings drive our community: Tech, Media, Events, PR, Content, and Design. Pick your domain and build serious portfolio projects!"
+      "Seven specialized wings drive our community: Tech, Media, Social Media, Events, PR, Content, and Design. Pick your domain and build serious portfolio projects!"
     ],
     robotState: "pointing",
     theme: "teams",
